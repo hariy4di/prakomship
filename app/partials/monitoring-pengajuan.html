@@ -1,0 +1,130 @@
+<!-- Prevent direct access to .html file -->
+<script>
+    if(typeof app === 'undefined'){
+        document.location.href='index.php';
+    }
+</script>
+
+<section class="content-header">
+	<h1>Monitoring Pengajuan</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+<div class="row">
+	<div class="col-md-12">
+        <div class="box box-default">
+
+            <div class="box-header with-border">
+                <div class="col-lg-8">
+                	<h4><strong>Monitoring Peraturan</strong></h4>
+                </div>
+            </div>
+
+            <div id="div-filter">
+                <div class="box-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-1">FILTER</label>
+                            <div class="col-md-3">
+                                <select id="status-filter" name="status-filter" class="form-control chosen"></select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="div-tabel">
+                <div class="box-body table-responsive" style="overflow-x:auto;">
+                    <table id="tabel-ruh" class="table table-hover">
+                        <thead>
+                        	<tr>
+                        		<th style="width:5%;">No</th>
+                        		<th>Jenis</th>
+                                <th>Nomor</th>
+                                <th>Tahun</th>
+                                <th>Tentang</th>
+                                <th>Status<br>Pengajuan</th>
+                                <th>Keterangan</th>
+                                <th>Tgl Update</th>
+                        	</tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+            </div>
+
+        </div>
+	</div>
+</div>
+
+</section>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+
+		jQuery('.chosen').chosen();
+
+		jQuery.get('pengajuan/monitoring/status-dropdown', function(result){
+            if(result){
+                jQuery('#status-filter').html(result).trigger('chosen:updated');
+            }
+        });
+
+        function page_default(){
+            jQuery('#div-filter,#div-tabel').show();
+            jQuery('.chosen').val('').trigger('chosen:updated');
+        }
+
+        page_default();
+
+        jQuery.fn.dataTable.ext.errMode = 'none';
+		var table=jQuery('#tabel-ruh').DataTable({
+            processing: true,
+            language:{
+			    "decimal":        "",
+			    "emptyTable":     "<center>Tidak ada data tersedia</center>",
+			    "info":           "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+			    "infoEmpty":      "Menampilkan 0 sampai 0 dari 0 entri",
+			    "infoFiltered":   "(disaring dari _MAX_ total entri)",
+			    "infoPostFix":    "",
+			    "thousands":      ",",
+			    "lengthMenu":     "Tampilkan _MENU_ entri",
+			    "loadingRecords": "Proses Loading...",
+			    "processing":     "Sedang Proses...",
+			    "search":         "Cari:",
+			    "zeroRecords":    "Tidak ditemukan data yang sesuai",
+			    "paginate": {
+			        "first":      "Awal",
+			        "last":       "Akhir",
+			        "next":       "Sesudah",
+			        "previous":   "Sebelum"
+			    },
+			    "aria": {
+			        "sortAscending":  ": aktifkan untuk mengurutkan kolom (asc)",
+			        "sortDescending": ": aktifkan untuk mengurutkan kolom (desc)"
+			    }
+			},
+            serverSide: true,
+            ajax: 'pengajuan/monitoring',
+            columns: [
+                {data: 'DT_Row_Index', name: 'DT_Row_Index', className: 'table-center', orderable: false, searchable:false},
+	            {data: 'jenis', name: 'jenis', searchable:false},
+                {data: 'nomor', name: 'nomor'},
+                {data: 'tahun', name: 'tahun', className: 'table-center'},
+                {data: 'tentang', name: 'tentang'},
+                {data: 'nama_status', name: 'nama_status', className: 'table-center', searchable:false},
+                {data: 'keterangan', name: 'keterangan', orderable:false, searchable:false},
+                {data: 'updated_at', name: 'updated_at', className: 'table-center', searchable:false}
+	        ]
+        });
+
+        jQuery('#status-filter').change(function(){
+            var status=jQuery('#status-filter').val();
+            table.ajax.url("pengajuan/monitoring?status="+status).load();
+        });
+
+	});
+</script>
