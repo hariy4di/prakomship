@@ -1,0 +1,561 @@
+<!-- Prevent direct access to .html file -->
+<script>
+    if(typeof app === 'undefined'){
+        document.location.href='index.php';
+    }
+</script>
+
+<section class="content-header">
+	<h1>Survei</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+<div class="row">
+	<div class="col-md-12">
+        <div class="box box-default">
+
+            <div class="box-header with-border">
+                <div class="col-lg-8">
+                	<h4><strong>Survei-Pertanyaan </strong></h4>
+                </div>
+            </div>
+
+            <div id="div-tabel">
+                <div class="box-body table-responsive" style="overflow-x:auto;">
+                    <table id="tabel-ruh" class="table table-hover">
+                        <thead>
+                        	<tr>
+                        		<th style="width:5%;">No</th>
+                        		<th>Jenis</th>
+                                <th>Nomor</th>
+                                <th>Tahun</th>
+                                <th>Tentang</th>
+                                <th>Status<br>Pengajuan</th>
+                                <th>Ket</th>
+                                <th>Aksi</th>
+                        	</tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+            </div>
+
+            <div id="div-form">
+                <div class="box-body">
+                    <form id="form-ruh" name="form-ruh" class="form-horizontal">
+                        <input type="text" id="inp-id" name="inp-id" class="hide">
+                        <input type="text" id="inp-rekambaru" name="inp-rekambaru" class="hide">
+                        <input type="hidden" id="_token" name="_token">
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="pull-right">Jenis Peraturan</span></label>
+                            <div class="col-sm-3">
+                                <select id="jenis" name="jenis" class="form-control chosen"></select>
+                            </div>
+                            <span id="warning-jenis" class="label label-danger warning">required!</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="pull-right">Nomor Peraturan</span></label>
+                            <div class="col-sm-3">
+                                <input type="text" id="nomor" name="nomor" class="form-control">
+                            </div>
+                            <span id="warning-nomor" class="label label-danger warning">required!</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="pull-right">Tahun</span></label>
+                            <div class="col-sm-2">
+                                <input type="text" id="tahun" name="tahun" class="form-control val_num" maxlength="4">
+                            </div>
+                            <span id="warning-tahun" class="label label-danger warning">required!</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="pull-right">Tentang</span></label>
+                            <div class="col-sm-6">
+                                <textarea id="tentang" name="tentang" class="form-control" maxlength="4000"></textarea>
+                            </div>
+                            <span id="warning-tentang" class="label label-danger warning">required!</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="pull-right">Abstrak</span></label>
+                            <div class="col-sm-6">
+                                <textarea id="abstrak" name="abstrak" class="form-control" maxlength="4000" rows="9"></textarea>
+                            </div>
+                            <span id="warning-abstrak" class="label label-danger warning">required!</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Lampiran<br>(*.pdf, max 2MB)</label>
+                            <div class="col-lg-6" id="div-upload">
+                                <span class="btn btn-primary fileinput-button">
+                                    <i class="fa fa-upload"></i>
+                                    <span>Attach File</span>
+                                    <input id="fileupload" type="file" name="file">
+                                </span>
+                                <div id="files" class="files"></div>
+                                <div id="progress" class="progress">
+                                    <div class="progress-bar progress-bar-danger"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div id="nmfile"></div>
+                                <div id="div-lampiran"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label"></label>
+                            <div class="col-sm-6">
+                                <button id="simpan" type="button" class="btn btn-primary">Simpan</button> 
+                                <button id="batal" type="button" class="btn btn-danger">Batal</button> 
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+
+        </div>
+	</div>
+</div>
+
+</section>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+
+		jQuery('.chosen').chosen();
+
+		function form_valid(str_id){
+            var arr_id=str_id.split(',');
+            var lanjut=true;
+            for(x=0;x<arr_id.length;x++){
+                if(jQuery('#'+arr_id[x]).val()==''){
+                    jQuery('#warning-'+arr_id[x]).show();
+                    lanjut=false;
+                }
+            }
+            return lanjut;
+        }
+
+        $.get('cek-level', function(result) {
+            if(result=='01'){ //operator
+                $('#tambah').html('<button class="btn btn-info btn-sm pull-right tambah"><i class="fa fa-plus"></i></button>');
+            }
+            else{
+                $('#tambah').html('');
+            }
+        });
+
+        jQuery.get('pengajuan/jenis-dropdown', function(result){
+            if(result){
+                jQuery('#jenis').html(result).trigger('chosen:updated');
+            }
+        });
+
+        jQuery.get('thnPeraturan-dropdown', function(result){
+            if(result){
+                jQuery('#tahun-filter').html(result).trigger('chosen:updated');
+            }
+        });
+
+        jQuery.extend({
+            getValues: function(url) {
+                var result = null;
+                jQuery.ajax({
+                    url: url,
+                    type: 'get',
+                    async: false,
+                    success: function(data) {
+                        result = data;
+                    }
+                });
+               return result;
+            }
+        });
+        
+        var token1= jQuery.getValues("token");
+
+        jQuery('#fileupload').click(function(){
+            jQuery('#progress .progress-bar').css('width', 0);
+            jQuery('#progress .progress-bar').html('');
+            jQuery('#nmfile').html('');
+        });
+
+        //upload lampiran
+        jQuery('#fileupload').fileupload({
+            url:'pengajuan/file-upload',
+            dataType: 'json',
+            formData: {
+                _token:token1
+            },
+            done: function (e, data) {
+                jQuery('#nmfile').html(data.files[0].name);
+                alertify.log('Upload attachment '+data.files[0].name+' berhasil!');
+            },
+            error: function(error) {
+                alertify.log(error.responseText);
+                //alertify.log('Upload attachment gagal!');
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                jQuery('#progress .progress-bar').css('width',progress + '%');
+            }
+        }).prop('disabled', !$.support.fileInput)
+          .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+        function page_default(){
+            jQuery('.warning,#div-form').hide();
+            jQuery('input,textarea').val('');
+            jQuery('#div-filter,#div-tabel').show();
+            jQuery('.chosen').val('').trigger('chosen:updated');
+            jQuery.get('attach-destroy', function(result){
+                if(result){
+                    console.log(result);
+                }
+                else{
+                    alertify.log('Sesi Anda habis, silahkan refresh browser!');
+                }
+            });
+        }
+
+        page_default();
+
+        jQuery('#batal').click(function(){
+            page_default();
+        });
+
+        jQuery.fn.dataTable.ext.errMode = 'none';
+		var table=jQuery('#tabel-ruh').DataTable({
+            processing: true,
+            language:{
+			    "decimal":        "",
+			    "emptyTable":     "<center>Tidak ada data tersedia</center>",
+			    "info":           "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+			    "infoEmpty":      "Menampilkan 0 sampai 0 dari 0 entri",
+			    "infoFiltered":   "(disaring dari _MAX_ total entri)",
+			    "infoPostFix":    "",
+			    "thousands":      ",",
+			    "lengthMenu":     "Tampilkan _MENU_ entri",
+			    "loadingRecords": "Proses Loading...",
+			    "processing":     "Sedang Proses...",
+			    "search":         "Cari:",
+			    "zeroRecords":    "Tidak ditemukan data yang sesuai",
+			    "paginate": {
+			        "first":      "Awal",
+			        "last":       "Akhir",
+			        "next":       "Sesudah",
+			        "previous":   "Sebelum"
+			    },
+			    "aria": {
+			        "sortAscending":  ": aktifkan untuk mengurutkan kolom (asc)",
+			        "sortDescending": ": aktifkan untuk mengurutkan kolom (desc)"
+			    }
+			},
+            serverSide: true,
+            ajax: 'pengajuan',
+            columns: [
+                {data: 'DT_Row_Index', name: 'DT_Row_Index', className: 'table-center', orderable: false, searchable:false},
+	            {data: 'jenis', name: 'jenis', searchable:false},
+                {data: 'nomor', name: 'nomor'},
+                {data: 'tahun', name: 'tahun', className: 'table-center'},
+                {data: 'tentang', name: 'tentang'},
+                {data: 'nama_status', name: 'nama_status', className: 'table-center', searchable:false},
+                {data: 'keterangan', name: 'keterangan', orderable:false, searchable:false},
+	            {data: 'action', name: 'action', orderable: false, searchable: false}
+	        ]
+        });
+
+        jQuery('#tahun-filter').change(function(){
+            var tahun=jQuery('#tahun-filter').val();
+            table.ajax.url("pengajuan?tahun="+tahun).load();
+        });
+
+        function cari_data(id){
+            jQuery('#nomor,#tahun,#tentang,#abstrak').val('');
+            jQuery('#jenis').val('').trigger('chosen:updated');
+            jQuery.getJSON('peraturan/'+id, function(result){
+                if(result){
+                    jQuery('#jenis').val(result.jenis_id).trigger('chosen:updated');
+                    jQuery('#nomor').val(result.nomor);
+                    jQuery('#tahun').val(result.tahun);
+                    jQuery('#tentang').val(result.tentang);
+                    jQuery('#abstrak').val(result.abstrak);
+                }
+            });
+        }
+
+        jQuery('body').off('click','.tambah').on('click','.tambah', function(){
+            jQuery('#jenis').val('').trigger('chosen:updated');
+            jQuery('#nomor,#tahun,#tentang,#abstrak');
+            jQuery('#div-filter,#div-tabel').hide();
+            jQuery('#div-form').show();
+            jQuery('#inp-rekambaru').val('1');
+            jQuery('#inp-id').val('');
+        });
+
+        jQuery('body').off('click', '.ubah').on('click', '.ubah', function(){
+            var id=this.id;
+            cari_data(id);
+            jQuery('#inp-id').val(id);
+            jQuery('#inp-rekambaru').val('0');
+            jQuery('#div-filter,#div-tabel').hide();
+            jQuery('#div-form').show();
+        });
+
+        jQuery('#simpan').click(function(){
+            jQuery('#simpan').html('Loading...');
+            jQuery('#simpan').prop('disabled',true);
+            var lanjut=form_valid('jenis,nomor,tahun,tentang,abstrak');
+            if(lanjut==true){
+                jQuery.get('token', function(token){
+                    if(token){
+                        jQuery('#_token').val(token);
+                        var data=jQuery('#form-ruh').serialize();
+                        if(jQuery('#inp-rekambaru').val()=='1'){
+                            jQuery.ajax({
+                                url:'pengajuan',
+                                method:'POST',
+                                data:data,
+                                success:function(result){
+                                    if(result=='success'){
+                                        jQuery('#simpan').html('Simpan');
+                                        jQuery('#simpan').prop('disabled',false);
+                                        alertify.log('Proses simpan berhasil.');
+                                        page_default();
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        jQuery('#simpan').html('Simpan');
+                                        jQuery('#simpan').prop('disabled',false);
+                                        alertify.log(result);
+                                    }   
+                                },
+                                error:function(result){
+                                    jQuery('#simpan').html('Simpan');
+                                    jQuery('#simpan').prop('disabled',false);
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            jQuery.ajax({
+                                url:'pengajuan',
+                                method:'PUT',
+                                data:data,
+                                success:function(result){
+                                    if(result=='success'){
+                                        jQuery('#simpan').html('Simpan');
+                                        jQuery('#simpan').prop('disabled',false);
+                                        alertify.log('Proses ubah berhasil.');
+                                        page_default();
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        jQuery('#simpan').html('Simpan');
+                                        jQuery('#simpan').prop('disabled',false);
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    jQuery('#simpan').html('Simpan');
+                                    jQuery('#simpan').prop('disabled',false);
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                    }
+                    else{
+                        jQuery('#simpan').html('Simpan');
+                        jQuery('#simpan').prop('disabled',false);
+                        alertify.log('Proses simpan gagal. Silahkan refresh halaman browser Anda!');
+                    }
+                });
+            }
+            else{
+                jQuery('#simpan').html('Simpan');
+                jQuery('#simpan').prop('disabled',false);
+                alertify.log('Kolom tidak boleh dikosongkan!');
+            }
+        });
+
+        jQuery('body').off('click', '.proses-pengajuan').on('click', '.proses-pengajuan', function(){
+            var id=this.id;
+            alertify.confirm('Ajukan ke Verifikator?', function(e){
+                if(e){
+                    jQuery.get('token', function(token){
+                        if(token){
+                            jQuery.ajax({
+                                url:'pengajuan/verifikator',
+                                method:'PUT',
+                                data:{
+                                    _token:token,
+                                    id:id
+                                },
+                                success:function(result){
+                                    if(result=='success'){
+                                        alertify.log('Proses pengajuan berhasil.');
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            alertify.log('Proses pengajuan gagal. Silahkan refresh halaman browser Anda!');
+                        }
+                    });
+                }
+            });
+        });
+
+        jQuery('body').off('click', '.proses-draft').on('click', '.proses-draft', function(){
+            var id=this.id;
+            alertify.confirm('Ajukan ke Administrator?', function(e){
+                if(e){
+                    jQuery.get('token', function(token){
+                        if(token){
+                            jQuery.ajax({
+                                url:'pengajuan/administrator',
+                                method:'PUT',
+                                data:{
+                                    _token:token,
+                                    id:id
+                                },
+                                success:function(result){
+                                    if(result=='success'){
+                                        alertify.log('Proses pengajuan berhasil.');
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            alertify.log('Proses pengajuan gagal. Silahkan refresh halaman browser Anda!');
+                        }
+                    });
+                }
+            });
+        });
+
+        jQuery('body').off('click', '.tolak-pengajuan').on('click', '.tolak-pengajuan', function(){
+            var id=this.id;
+            alertify.prompt( 'Kembalikan ke Operator?', function(evt, value) {
+                if(value){
+                    jQuery.get('token', function(token){
+                        if(token){
+                            jQuery.ajax({
+                                url:'pengajuan/operator-tolak',
+                                method:'PUT',
+                                data:{
+                                    _token:token,
+                                    id:id,
+                                    keterangan:value
+                                },
+                                success:function(result){
+                                    if(result=='success'){
+                                        alertify.log('Proses penolakan berhasil!');
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            alertify.log('Proses penolakan gagal. Silahkan refresh halaman browser Anda!');
+                        }
+                    });
+                }
+            });
+        });
+
+        jQuery('body').off('click', '.proses-terbit').on('click', '.proses-terbit', function(){
+            var id=this.id;
+            alertify.confirm('Terbitkan Peraturan ini?', function(e){
+                if(e){
+                    jQuery.get('token', function(token){
+                        if(token){
+                            jQuery.ajax({
+                                url:'pengajuan/terbit',
+                                method:'PUT',
+                                data:{
+                                    _token:token,
+                                    id:id
+                                },
+                                success:function(result){
+                                    if(result=='success'){
+                                        alertify.log('Proses penerbitan berhasil.');
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            alertify.log('Proses penerbitan gagal. Silahkan refresh halaman browser Anda!');
+                        }
+                    });
+                }
+            });
+        });
+
+        jQuery('body').off('click', '.tolak-draft').on('click', '.tolak-draft', function(){
+            var id=this.id;
+            alertify.prompt( 'Kembalikan ke Verifikator?', function(evt, value) {
+                if(value){
+                    jQuery.get('token', function(token){
+                        if(token){
+                            jQuery.ajax({
+                                url:'pengajuan/verifikator-tolak',
+                                method:'PUT',
+                                data:{
+                                    _token:token,
+                                    id:id,
+                                    keterangan:value
+                                },
+                                success:function(result){
+                                    if(result=='success'){
+                                        alertify.log('Proses penolakan berhasil!');
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            alertify.log('Proses penolakan gagal. Silahkan refresh halaman browser Anda!');
+                        }
+                    });
+                }
+            });
+        });
+
+	});
+</script>

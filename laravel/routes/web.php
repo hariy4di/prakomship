@@ -20,6 +20,9 @@ Route::get('login', 'AuthController@index');
 Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 
+Route::get('survei', 'SurveiController@index');
+Route::get('survei/usiaDropDown', 'SurveiController@dropdown_usia');
+
 
 Route::middleware(['auth'])->group(function () {
 Route::prefix('app')->group(function () {

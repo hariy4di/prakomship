@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2018 at 04:14 AM
+-- Generation Time: Jul 28, 2018 at 10:42 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.1.12
 
@@ -246,7 +246,11 @@ INSERT INTO `r_survei_jawab` (`id`, `deskripsi`) VALUES
 (2, 'Kurang Puas'),
 (3, 'Cukup Puas'),
 (4, 'Puas'),
-(5, 'Sangat Puas');
+(5, 'Sangat Puas'),
+(6, 'Dibawah 20 Tahun'),
+(7, '20 Tahun - 29 Tahun'),
+(8, '30 Tahun - 39 Tahun'),
+(9, '40 Tahun keatas');
 
 -- --------------------------------------------------------
 
@@ -256,34 +260,35 @@ INSERT INTO `r_survei_jawab` (`id`, `deskripsi`) VALUES
 
 CREATE TABLE `r_survei_tanya` (
   `id` int(11) NOT NULL,
-  `deskripsi` varchar(255) NOT NULL
+  `deskripsi` varchar(255) NOT NULL,
+  `jenis` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `r_survei_tanya`
 --
 
-INSERT INTO `r_survei_tanya` (`id`, `deskripsi`) VALUES
-(1, 'Mohon mengisi kantor tempat Saudara bekerja saat ini :'),
-(2, 'Silahkan menyebutkan usia Saudara :'),
-(3, 'Rata-rata dalam 1 minggu, berapa kali anda menggunakan aplikasi SHIP tersebut?'),
-(4, 'Dari Skala 1-10, Seberapa besar Manfaat Aplikasi SHIP dalam menunjang pekerjaan Saudara ?'),
-(5, 'Kemudahan mengakses aplikasi (awal buka aplikasi)'),
-(6, 'Kecepatan pencarian data/informasi'),
-(7, 'Kecepatan mengunduh data/dokumen'),
-(8, 'Kestabilan aplikasi'),
-(9, 'Kesesuaian fitur/menu terhadap kebutuhan'),
-(10, 'Fitur/menu mudah digunakan'),
-(11, 'Ketersediaan petunjuk penggunaan'),
-(12, 'Kejelasan petunjuk penggunaan'),
-(13, 'Desain tampilan aplikasi'),
-(14, 'Kemudahan penggunaan aplikasi'),
-(15, 'Keakuratan data yang ditampilkan'),
-(16, 'Data yang dihasilkan informatif'),
-(17, 'Data yang dihasilkan sesuai dengan kebutuhan'),
-(18, 'Apakah anda pernah mengalami kendala pada saat menggunakan aplikasi SHIP?'),
-(19, 'Silahkan berikan informasi terkait kendala terhadap aplikasi tersebut'),
-(20, 'Silahkan berikan saran dan masukkan terhadap aplikasi tersebut');
+INSERT INTO `r_survei_tanya` (`id`, `deskripsi`, `jenis`) VALUES
+(1, 'Mohon mengisi kantor tempat Saudara bekerja saat ini :', '1'),
+(2, 'Berapa usia Saudara saat ini?', '2'),
+(3, 'Rata-rata dalam 1 minggu, berapa kali anda menggunakan aplikasi SHIP tersebut?', '1'),
+(4, 'Dari Skala 1-10, Seberapa besar Manfaat Aplikasi SHIP dalam menunjang pekerjaan Saudara ?', '1'),
+(5, 'Kemudahan mengakses aplikasi (awal buka aplikasi)', '3'),
+(6, 'Kecepatan pencarian data/informasi', '3'),
+(7, 'Kecepatan mengunduh data/dokumen', '3'),
+(8, 'Kestabilan aplikasi', '3'),
+(9, 'Kesesuaian fitur/menu terhadap kebutuhan', '3'),
+(10, 'Fitur/menu mudah digunakan', '3'),
+(11, 'Ketersediaan petunjuk penggunaan', '3'),
+(12, 'Kejelasan petunjuk penggunaan', '3'),
+(13, 'Desain tampilan aplikasi', '3'),
+(14, 'Kemudahan penggunaan aplikasi', '3'),
+(15, 'Keakuratan data yang ditampilkan', '3'),
+(16, 'Data yang dihasilkan informatif', '3'),
+(17, 'Data yang dihasilkan sesuai dengan kebutuhan', '3'),
+(18, 'Apakah anda pernah mengalami kendala pada saat menggunakan aplikasi SHIP?', '1'),
+(19, 'Silahkan berikan informasi terkait kendala terhadap aplikasi tersebut', '1'),
+(20, 'Silahkan berikan saran dan masukkan terhadap aplikasi tersebut', '1');
 
 -- --------------------------------------------------------
 
@@ -292,7 +297,7 @@ INSERT INTO `r_survei_tanya` (`id`, `deskripsi`) VALUES
 --
 
 CREATE TABLE `tb_ip_client` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) NOT NULL,
   `ip_address` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -348,7 +353,7 @@ CREATE TABLE `tb_survei` (
   `id` int(11) UNSIGNED NOT NULL,
   `ip_id` int(11) NOT NULL,
   `pertanyaan` int(11) NOT NULL,
-  `jawaban` int(11) NOT NULL
+  `jawaban` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -465,7 +470,8 @@ ALTER TABLE `tb_peraturan`
 -- Indexes for table `tb_survei`
 --
 ALTER TABLE `tb_survei`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ip_id` (`ip_id`);
 
 --
 -- Indexes for table `tb_user`
@@ -485,7 +491,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `r_instansi`
 --
 ALTER TABLE `r_instansi`
-  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `r_label`
@@ -497,7 +503,7 @@ ALTER TABLE `r_label`
 -- AUTO_INCREMENT for table `r_survei_jawab`
 --
 ALTER TABLE `r_survei_jawab`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `r_survei_tanya`
@@ -509,7 +515,7 @@ ALTER TABLE `r_survei_tanya`
 -- AUTO_INCREMENT for table `tb_ip_client`
 --
 ALTER TABLE `tb_ip_client`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_peraturan`
@@ -539,6 +545,12 @@ ALTER TABLE `tb_user`
 ALTER TABLE `d_menu_level`
   ADD CONSTRAINT `FK_d_menu_level_d_menu` FOREIGN KEY (`menu_id`) REFERENCES `d_menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_d_menu_level_r_level` FOREIGN KEY (`kd_level`) REFERENCES `r_level` (`kd_level`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_survei`
+--
+ALTER TABLE `tb_survei`
+  ADD CONSTRAINT `tb_survei_ibfk_1` FOREIGN KEY (`ip_id`) REFERENCES `tb_ip_client` (`id`);
 
 --
 -- Constraints for table `tb_user`

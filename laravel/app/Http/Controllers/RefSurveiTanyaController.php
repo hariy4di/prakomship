@@ -28,8 +28,8 @@ class RefSurveiTanyaController extends Controller
     {
         try {
             $insert = DB::insert(
-                "INSERT INTO r_survei_tanya(deskripsi)
-                 VALUES(?)",[$request -> input('deskripsi')]
+                "INSERT INTO r_survei_tanya(deskripsi, jenis)
+                 VALUES(?,'1')",[$request -> input('deskripsi')]
             );
 
             if($insert) {
