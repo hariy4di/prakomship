@@ -1,0 +1,283 @@
+<!-- Prevent direct access to .html file -->
+<script>
+    if(typeof app === 'undefined'){
+        document.location.href='index.php';
+    }
+</script>
+
+<section class="content-header">
+	<h1>Referensi - Jawaban Survei</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+<div class="row">
+	<div class="col-md-12">
+        <div class="box box-default">
+
+            <div class="box-header with-border">
+                <div class="col-lg-8">
+                	<h4><strong>Tabel Referensi Jawaban Survei</strong></h4>
+                </div>
+                <div class="col-lg-4">
+                    <button class="btn btn-info btn-sm pull-right tambah">
+                    	<i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="div-tabel">
+                <div class="box-body table-responsive" style="overflow-x:auto;">
+                    <table id="tabel-ruh" class="table table-hover">
+                        <thead>
+                        	<tr>
+                        		<th style="width:10%;">ID</th>
+                                <th>Deskripsi</th>
+                        		<th>Aksi</th>
+                        	</tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+            </div>
+
+            <div id="div-form">
+                <div class="box-body">
+                    <form id="form-ruh" name="form-ruh" class="form-horizontal">
+                        <input type="text" id="inp-id" name="inp-id" class="hide">
+                        <input type="text" id="inp-rekambaru" name="inp-rekambaru" class="hide">
+                        <input type="hidden" id="_token" name="_token">
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="pull-right">Deskripsi</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" id="deskripsi" name="deskripsi" class="form-control">
+                            </div>
+                                <span id="warning-label" class="label label-danger warning">required!</span>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label"></label>
+                            <div class="col-sm-6">
+                                <button id="simpan" type="button" class="btn btn-primary">Simpan</button> 
+                                <button id="batal" type="button" class="btn btn-danger">Batal</button> 
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+
+        </div>
+	</div>
+</div>
+
+</section>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+
+		jQuery('.chosen').chosen();
+
+		function form_valid(str_id){
+            var arr_id=str_id.split(',');
+            var lanjut=true;
+            for(x=0;x<arr_id.length;x++){
+                if(jQuery('#'+arr_id[x]).val()==''){
+                    jQuery('#warning-'+arr_id[x]).show();
+                    lanjut=false;
+                }
+            }
+            return lanjut;
+        }
+
+		function page_default(){
+            jQuery('.warning,#div-form').hide();
+            jQuery('input,textarea').val('');
+            jQuery('#div-tabel').show();
+            jQuery('.chosen').val('').trigger('chosen:updated');
+        }
+
+        function cari_data(id){
+            jQuery('#deskripsi').val('');
+            jQuery.getJSON('surveiJawab/'+id, function(result){
+                if(result){
+                    jQuery('#deskripsi').val(result.deskripsi);
+                }
+            });
+        }
+
+        page_default();
+
+        jQuery('#batal').click(function(){
+            page_default();
+        });
+
+        jQuery.fn.dataTable.ext.errMode = 'none';
+		var table=jQuery('#tabel-ruh').DataTable({
+            processing: true,
+            language:{
+			    "decimal":        "",
+			    "emptyTable":     "Tidak ada data tersedia",
+			    "info":           "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+			    "infoEmpty":      "Menampilkan 0 sampai 0 dari 0 entri",
+			    "infoFiltered":   "(disaring dari _MAX_ total entri)",
+			    "infoPostFix":    "",
+			    "thousands":      ",",
+			    "lengthMenu":     "Tampilkan _MENU_ entri",
+			    "loadingRecords": "Proses Loading...",
+			    "processing":     "Sedang Proses...",
+			    "search":         "Cari:",
+			    "zeroRecords":    "Tidak ditemukan data yang sesuai",
+			    "paginate": {
+			        "first":      "Awal",
+			        "last":       "Akhir",
+			        "next":       "Sesudah",
+			        "previous":   "Sebelum"
+			    },
+			    "aria": {
+			        "sortAscending":  ": aktifkan untuk mengurutkan kolom (asc)",
+			        "sortDescending": ": aktifkan untuk mengurutkan kolom (desc)"
+			    }
+			},
+            serverSide: true,
+            ajax: 'surveiJawab',
+            columns: [
+	            {data: 'id', name: 'id', className: 'table-center', orderable: false, searchable: false},
+	            {data: 'deskripsi', name: 'deskripsi'},
+	            {data: 'action', name: 'action', orderable: false, searchable: false}
+	        ]
+        });
+
+        jQuery('body').off('click','.tambah').on('click','.tambah', function(){
+            jQuery('#deskripsi').val('');
+            jQuery('#div-tabel').hide();
+            jQuery('#div-form').show();
+            jQuery('#inp-rekambaru').val('1');
+            jQuery('#inp-id').val('');
+        });
+
+        jQuery('body').off('click', '.ubah').on('click', '.ubah', function(){
+            var id=this.id;
+            cari_data(id);
+            jQuery('#inp-id').val(id);
+            jQuery('#inp-rekambaru').val('0');
+            jQuery('#div-tabel').hide();
+            jQuery('#div-form').show();
+        });
+
+        jQuery('#simpan').click(function(){
+            jQuery('#simpan').html('Loading...');
+            jQuery('#simpan').prop('disabled',true);
+            var lanjut=form_valid('deskripsi');
+            if(lanjut==true){
+                jQuery.get('token', function(token){
+                    if(token){
+                        jQuery('#_token').val(token);
+                        var data=jQuery('#form-ruh').serialize();
+                        if(jQuery('#inp-rekambaru').val()=='1'){
+                            jQuery.ajax({
+                                url:'surveiJawab',
+                                method:'POST',
+                                data:data,
+                                success:function(result){
+                                    if(result=='success'){
+                                        jQuery('#simpan').html('Simpan');
+                                        jQuery('#simpan').prop('disabled',false);
+                                        alertify.log('Proses simpan berhasil.');
+                                        page_default();
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        jQuery('#simpan').html('Simpan');
+                                        jQuery('#simpan').prop('disabled',false);
+                                        alertify.log(result);
+                                    }   
+                                },
+                                error:function(result){
+                                    jQuery('#simpan').html('Simpan');
+                                    jQuery('#simpan').prop('disabled',false);
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            jQuery.ajax({
+                                url:'surveiJawab',
+                                method:'PUT',
+                                data:data,
+                                success:function(result){
+                                    if(result=='success'){
+                                        jQuery('#simpan').html('Simpan');
+                                        jQuery('#simpan').prop('disabled',false);
+                                        alertify.log('Proses ubah berhasil.');
+                                        page_default();
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        jQuery('#simpan').html('Simpan');
+                                        jQuery('#simpan').prop('disabled',false);
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    jQuery('#simpan').html('Simpan');
+                                    jQuery('#simpan').prop('disabled',false);
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                    }
+                    else{
+                        jQuery('#simpan').html('Simpan');
+                        jQuery('#simpan').prop('disabled',false);
+                        alertify.log('Proses simpan gagal. Silahkan refresh halaman browser Anda!');
+                    }
+                });
+            }
+            else{
+                jQuery('#simpan').html('Simpan');
+                jQuery('#simpan').prop('disabled',false);
+                alertify.log('Kolom tidak boleh dikosongkan!');
+            }
+        });
+
+        jQuery('body').off('click', '.hapus').on('click', '.hapus', function(){
+            var id=this.id;
+            alertify.confirm('Hapus data ini?', function(e){
+                if(e){
+                    jQuery.get('token', function(token){
+                        if(token){
+                            jQuery.ajax({
+                                url:'surveiJawab',
+                                method:'DELETE',
+                                data:{
+                                    _token:token,
+                                    id:id
+                                },
+                                success:function(result){
+                                    if(result=='success'){
+                                        alertify.log('Proses hapus berhasil.');
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            alertify.log('Proses hapus gagal. Silahkan refresh halaman browser anda.');
+                        }
+                    });
+                }
+            });
+        });
+
+	});
+</script>
