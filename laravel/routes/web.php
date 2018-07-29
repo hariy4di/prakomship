@@ -38,6 +38,7 @@ Route::prefix('app')->group(function () {
 	Route::post('pengajuan/file-upload', 'PengajuanController@file_upload');
 	Route::post('pengajuan', 'PengajuanController@store');
 	Route::put('pengajuan', 'PengajuanController@update');
+	Route::delete('pengajuan', 'PengajuanController@destroy');
 
 	Route::put('pengajuan/verifikator', 'PengajuanController@update_verifikator');
 	Route::put('pengajuan/administrator', 'PengajuanController@update_administrator');
@@ -80,12 +81,9 @@ Route::prefix('app')->group(function () {
     Route::post('jnsPeraturan', 'RefJnsPeraturanController@store');
     Route::get('jnsPeraturan/{id}', 'RefJnsPeraturanController@edit');
     Route::put('jnsPeraturan', 'RefJnsPeraturanController@update');
-<<<<<<< HEAD
-    Route::delete('jnsPeraturan', 'RefInstansiController@destroy');
-    
-=======
 	Route::delete('jnsPeraturan', 'RefInstansiController@destroy');
 	
+
 	//Pertanyaan Survei
     Route::get('surveiTanya', 'RefSurveiTanyaController@index');
     Route::post('surveiTanya', 'RefSurveiTanyaController@store');
@@ -93,12 +91,13 @@ Route::prefix('app')->group(function () {
     Route::put('surveiTanya', 'RefSurveiTanyaController@update');
 	Route::delete('surveiTanya', 'RefSurveiTanyaController@destroy');
 	
+
 	//Jawaban Survei
     Route::get('surveiJawab', 'RefSurveiJawabController@index');
     Route::post('surveiJawab', 'RefSurveiJawabController@store');
     Route::get('surveiJawab/{id}', 'RefSurveiJawabController@edit');
     Route::put('surveiJawab', 'RefSurveiJawabController@update');
     Route::delete('surveiJawab', 'RefSurveiJawabController@destroy');
->>>>>>> ed09d85750dfd7814623639468580ca802b9f238
+
 });
 });

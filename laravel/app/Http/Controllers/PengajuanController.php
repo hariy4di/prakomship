@@ -46,7 +46,7 @@ class PengajuanController extends Controller
 			LEFT OUTER JOIN r_status c ON(a.status_id=c.id)
 			LEFT OUTER JOIN tb_user d ON(a.user_id=d.id)
 			".$status.$tahun."
-			ORDER BY a.status_id
+			ORDER BY a.status_id, a.updated_at DESC
     	");
     	$rows=collect($rows);
     	
@@ -225,8 +225,25 @@ class PengajuanController extends Controller
 				return 'Proses ubah gagal!';
 			}
 		} catch (\Exception $e) {
-			//return 'Terjadi kesalahan lainnya. Hubungi Admin!';
-			return $e;
+			return 'Terjadi kesalahan lainnya. Hubungi Admin!';
+			//return $e;
+		}
+	}
+
+	public function destroy(Request $request)
+	{
+		try {
+			$delete=DB::delete("DELETE FROM tb_peraturan WHERE id=?", [$request->input('id')]);
+
+			if($delete){
+				return 'success';
+			}
+			else{
+				return 'Proses hapus gagal!';
+			}
+		} catch (\Exception $e) {
+			//return $e;
+			return 'Terjadi kesalahan lainnya. Hubungi Admin!';
 		}
 	}
 

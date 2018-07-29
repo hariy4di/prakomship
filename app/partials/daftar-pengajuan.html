@@ -291,6 +291,7 @@
         function cari_data(id){
             jQuery('#nomor,#tahun,#tentang,#abstrak').val('');
             jQuery('#jenis').val('').trigger('chosen:updated');
+            jQuery('#nmfile').html("");
             jQuery.getJSON('peraturan/'+id, function(result){
                 if(result){
                     jQuery('#jenis').val(result.jenis_id).trigger('chosen:updated');
@@ -307,6 +308,7 @@
             jQuery('#jenis,#nomor,#tahun').prop('disabled',false);
             jQuery('#jenis').val('').trigger('chosen:updated');
             jQuery('#nomor,#tahun,#tentang,#abstrak').val('');
+            jQuery('#nmfile').html("");
             jQuery('#div-filter,#div-tabel').hide();
             jQuery('#div-form').show();
             jQuery('#inp-rekambaru').val('1');
@@ -396,6 +398,41 @@
                 jQuery('#simpan').prop('disabled',false);
                 alertify.log('Kolom tidak boleh dikosongkan!');
             }
+        });
+
+        jQuery('body').off('click', '.hapus').on('click', '.hapus', function(){
+            var id=this.id;
+            alertify.confirm('Hapus data ini?', function(e){
+                if(e){
+                    jQuery.get('token', function(token){
+                        if(token){
+                            jQuery.ajax({
+                                url:'pengajuan',
+                                method:'DELETE',
+                                data:{
+                                    _token:token,
+                                    id:id
+                                },
+                                success:function(result){
+                                    if(result=='success'){
+                                        alertify.log('Proses hapus berhasil.');
+                                        table.ajax.reload();
+                                    }
+                                    else{
+                                        alertify.log(result);
+                                    }
+                                },
+                                error:function(result){
+                                    alertify.log(result);
+                                }
+                            });
+                        }
+                        else{
+                            alertify.log('Proses hapus gagal. Silahkan refresh halaman browser Anda!');
+                        }
+                    });
+                }
+            });
         });
 
         jQuery('body').off('click', '.proses-pengajuan').on('click', '.proses-pengajuan', function(){
