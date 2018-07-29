@@ -6,7 +6,7 @@
 </script>
 
 <section class="content-header">
-	<h1>Referensi - Instansi</h1>
+	<h1>Referensi - Pertanyaan Survei</h1>
 </section>
 
 <!-- Main content -->
@@ -18,7 +18,7 @@
 
             <div class="box-header with-border">
                 <div class="col-lg-8">
-                	<h4><strong>Tabel Referensi Instansi</strong></h4>
+                	<h4><strong>Tabel Referensi Pertanyaan Survei</strong></h4>
                 </div>
                 <div class="col-lg-4">
                     <button class="btn btn-info btn-sm pull-right tambah">
@@ -33,8 +33,7 @@
                         <thead>
                         	<tr>
                         		<th style="width:10%;">ID</th>
-                                <th>Nama Instansi</th>
-                                <th>Kota</th>
+                                <th>Deskripsi</th>
                         		<th>Aksi</th>
                         	</tr>
                         </thead>
@@ -52,18 +51,19 @@
                         <input type="hidden" id="_token" name="_token">
                         
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><span class="pull-right">Nama Instansi</span></label>
+                            <label class="col-sm-2 control-label"><span class="pull-right">Deskripsi</span></label>
                             <div class="col-sm-4">
-                                <input type="text" id="nama_instansi" name="nama_instansi" class="form-control">
+                                <input type="text" id="deskripsi" name="deskripsi" class="form-control">
                             </div>
-                                <span id="warning-nama_instansi" class="label label-danger warning">required!</span>
-                            <br>
-                            <br>
-                            <label class="col-sm-2 control-label"><span class="pull-right">Kota</span></label>
+                                <span id="warning-deskripsi" class="label label-danger warning">required!</span>
+                            <!-- <br>
+                            <br> -->
+                            <!-- <label class="col-sm-2 control-label"><span class="pull-right">Jenis</span>
+                            </label>
                             <div class="col-sm-4">
-                                <input type="text" id="kota" name="kota" class="form-control">
+                                <input type="text" id="jenis" name="jenis" class="form-control">
                             </div>
-                            <span id="warning-kota" class="label label-danger warning">required!</span>
+                            <span id="warning-jenis" class="label label-danger warning">required!</span> -->
                         </div>
                         <hr>
                         <div class="form-group">
@@ -109,17 +109,10 @@
         }
 
         function cari_data(id){
-            jQuery('#nama_instansi,#kota,#aktif').val('');
-            jQuery.getJSON('instansi/'+id, function(result){
+            jQuery('#deskripsi').val('');
+            jQuery.getJSON('surveiTanya/'+id, function(result){
                 if(result){
-                    jQuery('#nama_instansi').val(result.nama_instansi);
-                    jQuery('#kota').val(result.kota);
-                    if (result.aktif == '1') {
-                        jQuery('#rdaktif').prop('checked', true);
-                    }
-                    else {
-                        jQuery('#rdnonaktif').prop('checked', true);
-                    }
+                    jQuery('#deskripsi').val(result.deskripsi);
                 }
             });
         }
@@ -158,18 +151,16 @@
 			    }
 			},
             serverSide: true,
-            ajax: 'instansi',
+            ajax: 'surveiTanya',
             columns: [
 	            {data: 'id', name: 'id', className: 'table-center', orderable: false, searchable: false},
-	            {data: 'nama_instansi', name: 'nama_instansi'},
-                {data: 'kota', name: 'kota' },
+	            {data: 'deskripsi', name: 'deskripsi' },
 	            {data: 'action', name: 'action', orderable: false, searchable: false}
 	        ]
         });
 
         jQuery('body').off('click','.tambah').on('click','.tambah', function(){
-            jQuery('#nama_instansi').val('');
-            jQuery('#kota').val('');
+            jQuery('#deskripsi').val('');
             jQuery('#div-tabel').hide();
             jQuery('#div-form').show();
             jQuery('#inp-rekambaru').val('1');
@@ -188,7 +179,7 @@
         jQuery('#simpan').click(function(){
             jQuery('#simpan').html('Loading...');
             jQuery('#simpan').prop('disabled',true);
-            var lanjut=form_valid('nama_instansi,kota,aktif');
+            var lanjut=form_valid('deskripsi');
             if(lanjut==true){
                 jQuery.get('token', function(token){
                     if(token){
@@ -196,7 +187,7 @@
                         var data=jQuery('#form-ruh').serialize();
                         if(jQuery('#inp-rekambaru').val()=='1'){
                             jQuery.ajax({
-                                url:'instansi',
+                                url:'surveiTanya',
                                 method:'POST',
                                 data:data,
                                 success:function(result){
@@ -222,7 +213,7 @@
                         }
                         else{
                             jQuery.ajax({
-                                url:'instansi',
+                                url:'surveiTanya',
                                 method:'PUT',
                                 data:data,
                                 success:function(result){
@@ -268,7 +259,7 @@
                     jQuery.get('token', function(token){
                         if(token){
                             jQuery.ajax({
-                                url:'instansi',
+                                url:'surveiTanya',
                                 method:'DELETE',
                                 data:{
                                     _token:token,

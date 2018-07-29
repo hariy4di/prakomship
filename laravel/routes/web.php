@@ -20,6 +20,9 @@ Route::get('login', 'AuthController@index');
 Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 
+Route::get('survei', 'SurveiController@index');
+Route::get('survei/usiaDropDown', 'SurveiController@dropdown_usia');
+
 
 Route::middleware(['auth'])->group(function () {
 Route::prefix('app')->group(function () {
@@ -77,7 +80,25 @@ Route::prefix('app')->group(function () {
     Route::post('jnsPeraturan', 'RefJnsPeraturanController@store');
     Route::get('jnsPeraturan/{id}', 'RefJnsPeraturanController@edit');
     Route::put('jnsPeraturan', 'RefJnsPeraturanController@update');
+<<<<<<< HEAD
     Route::delete('jnsPeraturan', 'RefInstansiController@destroy');
     
+=======
+	Route::delete('jnsPeraturan', 'RefInstansiController@destroy');
+	
+	//Pertanyaan Survei
+    Route::get('surveiTanya', 'RefSurveiTanyaController@index');
+    Route::post('surveiTanya', 'RefSurveiTanyaController@store');
+    Route::get('surveiTanya/{id}', 'RefSurveiTanyaController@edit');
+    Route::put('surveiTanya', 'RefSurveiTanyaController@update');
+	Route::delete('surveiTanya', 'RefSurveiTanyaController@destroy');
+	
+	//Jawaban Survei
+    Route::get('surveiJawab', 'RefSurveiJawabController@index');
+    Route::post('surveiJawab', 'RefSurveiJawabController@store');
+    Route::get('surveiJawab/{id}', 'RefSurveiJawabController@edit');
+    Route::put('surveiJawab', 'RefSurveiJawabController@update');
+    Route::delete('surveiJawab', 'RefSurveiJawabController@destroy');
+>>>>>>> ed09d85750dfd7814623639468580ca802b9f238
 });
 });

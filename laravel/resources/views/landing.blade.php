@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('template/robust/app-assets/css/pages/search.css') }}">
     <!-- END Page Level CSS-->
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/chosen/chosen.min.css') }}">
+
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('template/robust/assets/css/style.css') }}">
     <!-- END Custom CSS-->
@@ -109,6 +111,7 @@
     <!-- END ROBUST JS-->
 
     <script src="{{ asset('plugins/trincotPagination/trincotPagination.js') }}"></script>
+    <script src="{{ asset('plugins/chosen/chosen.jquery.min.js') }}"></script>
 
     @yield('script')
     
