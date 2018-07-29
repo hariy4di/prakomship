@@ -39,7 +39,7 @@
 	                        <a href="{{ url('data/peraturan/'.$row[0]->nama_file) }}"
 	                           class="btn btn-primary btn-md"
 	                           target="_blank">
-	                        	<i class="icon-download5"></i> Download
+	                        	<i class="icon-download5"></i> File Peraturan
 	                        </a>
         				</li>
         				<div class="py-1 text-xs-center">

@@ -50,7 +50,7 @@
                                 <th>Tentang</th>
                                 <th>Status<br>Pengajuan</th>
                                 <th>Ket</th>
-                                <th>Aksi</th>
+                                <th style="width:12%;">Aksi</th>
                         	</tr>
                         </thead>
                         <tbody>
@@ -300,11 +300,13 @@
                     jQuery('#abstrak').val(result.abstrak);
                 }
             });
+            jQuery('#jenis,#nomor,#tahun').prop('disabled',true);
         }
 
         jQuery('body').off('click','.tambah').on('click','.tambah', function(){
+            jQuery('#jenis,#nomor,#tahun').prop('disabled',false);
             jQuery('#jenis').val('').trigger('chosen:updated');
-            jQuery('#nomor,#tahun,#tentang,#abstrak');
+            jQuery('#nomor,#tahun,#tentang,#abstrak').val('');
             jQuery('#div-filter,#div-tabel').hide();
             jQuery('#div-form').show();
             jQuery('#inp-rekambaru').val('1');

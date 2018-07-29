@@ -34,19 +34,20 @@ Route::prefix('app')->group(function () {
 	Route::get('pengajuan/jenis-dropdown', 'PengajuanController@jenis_dropdown');
 	Route::post('pengajuan/file-upload', 'PengajuanController@file_upload');
 	Route::post('pengajuan', 'PengajuanController@store');
+	Route::put('pengajuan', 'PengajuanController@update');
+
 	Route::put('pengajuan/verifikator', 'PengajuanController@update_verifikator');
 	Route::put('pengajuan/administrator', 'PengajuanController@update_administrator');
 	Route::put('pengajuan/operator-tolak', 'PengajuanController@update_operator_tolak');
 	Route::put('pengajuan/terbit', 'PengajuanController@update_terbit');
 	Route::put('pengajuan/verifikator-tolak', 'PengajuanController@update_verifikator_tolak');
-	/*Route::get('peraturan/{id}', 'PeraturanController@edit');
-	Route::put('peraturan', 'PeraturanController@update');
-	Route::delete('peraturan', 'PeraturanController@destroy');*/
 
+	
 	//Monitoring Pengajuan
 	Route::get('pengajuan/monitoring', 'PengajuanMonitoringController@index');
 	Route::get('pengajuan/monitoring/status-dropdown', 'PengajuanMonitoringController@status_dropdown');
 
+	
 	//Peraturan
 	Route::get('peraturan', 'PeraturanController@index');
 	Route::get('jnsPeraturan-dropdown', 'PeraturanController@jenis_dropdown');
@@ -54,6 +55,7 @@ Route::prefix('app')->group(function () {
 	Route::get('peraturan/{id}', 'PeraturanController@edit');
 	Route::put('peraturan', 'PeraturanController@update');
 
+	
 	//Label
 	Route::get('label', 'RefLabelController@index');
 	Route::post('label', 'RefLabelController@store');
@@ -61,6 +63,7 @@ Route::prefix('app')->group(function () {
 	Route::put('label', 'RefLabelController@update');
 	Route::delete('label', 'RefLabelController@destroy');
 
+	
 	//Instansi
 	Route::get('instansi', 'RefInstansiController@index');
 	Route::post('instansi', 'RefInstansiController@store');
@@ -68,11 +71,13 @@ Route::prefix('app')->group(function () {
 	Route::put('instansi', 'RefInstansiController@update');
 	Route::delete('instansi', 'RefInstansiController@destroy');
 
+    
     //Jenis Peraturan
     Route::get('jnsPeraturan', 'RefJnsPeraturanController@index');
     Route::post('jnsPeraturan', 'RefJnsPeraturanController@store');
     Route::get('jnsPeraturan/{id}', 'RefJnsPeraturanController@edit');
     Route::put('jnsPeraturan', 'RefJnsPeraturanController@update');
     Route::delete('jnsPeraturan', 'RefInstansiController@destroy');
+    
 });
 });

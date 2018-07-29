@@ -142,14 +142,13 @@
 <!-- ./wrapper -->
 
 <script src="{{ asset('template/adminlte245/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('template/adminlte245/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-
 <script src="{{ asset('template/adminlte245/bower_components/jquery-ui/jquery-ui.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 
+<script src="{{ asset('template/adminlte245/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('template/adminlte245/bower_components/fastclick/lib/fastclick.js') }}"></script>
 <script src="{{ asset('template/adminlte245/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('template/adminlte245/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>

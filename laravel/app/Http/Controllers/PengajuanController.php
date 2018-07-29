@@ -185,6 +185,51 @@ class PengajuanController extends Controller
 		}
 	}
 
+	public function update(Request $request)
+	{
+		try {
+			if(isset($_COOKIE['upload_lampiran']) && $_COOKIE['upload_lampiran']!==''){
+				
+				$lampiran = $_COOKIE['upload_lampiran'];
+
+				$update=DB::update("
+					UPDATE tb_peraturan
+					SET tentang=?,
+						abstrak=?,
+						nama_file=?
+					WHERE id=?
+				",[
+					$request->input('tentang'),
+					$request->input('abstrak'),
+					$lampiran,
+					$request->input('inp-id')
+				]);
+			}
+			else{
+				$update=DB::update("
+					UPDATE tb_peraturan
+					SET tentang=?,
+						abstrak=?
+					WHERE id=?
+				",[
+					$request->input('tentang'),
+					$request->input('abstrak'),
+					$request->input('inp-id')
+				]);
+			}
+
+			if($update){
+				return 'success';
+			}
+			else{
+				return 'Proses ubah gagal!';
+			}
+		} catch (\Exception $e) {
+			//return 'Terjadi kesalahan lainnya. Hubungi Admin!';
+			return $e;
+		}
+	}
+
 	public function update_verifikator(Request $request)
 	{
 		try {

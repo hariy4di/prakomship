@@ -35,6 +35,9 @@
 	</span>
 @endif
 
+	<a href="{{ url('/data/peraturan/'.$nm_file) }}" class="btn btn-warning btn-xs" title="Lihat Lampiran?" target="_blank">
+		<i class="fa fa-download"></i>
+	</a>
 
 @if(($status_id=='1' || $status_id=='5') && $level=='01')
 	<a href="javascript:;" class="btn btn-primary btn-xs ubah" title="Ubah Data?" id="{{ $id }}">
@@ -42,8 +45,10 @@
 	</a>
 @endif
 
-
-	<a href="{{ url('/data/peraturan/'.$nm_file) }}" class="btn btn-warning btn-xs" title="Download?" target="_blank">
-		<i class="fa fa-download"></i>
+@if($status_id=='1' && $level=='01')
+	<a href="javascript:;" class="btn btn-danger btn-xs hapus" title="Hapus Data?" id="{{ $id }}">
+		<i class="fa fa-trash"></i>
 	</a>
+@endif
+
 </center>
