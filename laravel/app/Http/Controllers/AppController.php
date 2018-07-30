@@ -15,7 +15,7 @@ class AppController extends Controller
 			LEFT OUTER JOIN d_menu_level b ON(a.id=b.menu_id)
 			WHERE a.aktif = '1'
 			  AND a.parent_id = 0
-			  AND b.kd_level = ?
+			  AND b.kd_level = 
 			ORDER BY a.no_urut
 		",[
 			session('kdlevel')

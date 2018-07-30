@@ -32,6 +32,10 @@ Route::prefix('app')->group(function () {
 	Route::get('cek-level', 'AppController@cek_level');
 	Route::get('attach-destroy', 'AppController@attach_destroy');
 
+
+	Route::get('test', 'TestController@index');
+
+
 	//Dashboard
 	Route::prefix('dashboard')->group(function () {
 		
