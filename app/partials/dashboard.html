@@ -14,39 +14,41 @@
     <div class="row">
      	  <div class="col-md-3 col-sm-6 col-xs-12">
           	<div class="info-box">
-              	<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+          		<a href="./#/pengajuan/daftar">
+              		<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+              	</a>
               	<div class="info-box-content">
-                		<span class="info-box-text">Pengajuan</span>
-                		<span class="info-box-number">-angka-<!-- <small>%</small> --></span>
+            		<span class="info-box-text">Pengajuan</span>
+            		<span class="info-box-number" id="pengajuan"></span>
               	</div>
           	</div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-              	<a href="./#/peraturan">
-                	 <span class="info-box-icon bg-red"><i class="fa fa-book"></i></span>
+            	<a href="./#/pengajuan/daftar">
+                	<span class="info-box-icon bg-red"><i class="fa fa-book"></i></span>
                 </a>
                 <div class="info-box-content">
                     <span class="info-box-text">Penolakan</span>
-                    <span class="info-box-number">-angka-</span>
+                    <span class="info-box-number" id="penolakan"></span>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
-    		    <div class="info-box">
-    		        <span class="info-box-icon bg-green"><i class="fa fa-book"></i></span>
-    		        <div class="info-box-content">
-          					<span class="info-box-text">Peraturan Final</span>
-          					<span class="info-box-number">-angka-</span>
-    		        </div>
-    		    </div>
+		    <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-book"></i></span>
+		        <div class="info-box-content">
+  					<span class="info-box-text">Peraturan Final</span>
+  					<span class="info-box-number" id="peraturan"></span>
+		        </div>
+		    </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
   	        <div class="info-box">
   	            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
   	            <div class="info-box-content">
-          					<span class="info-box-text">Pengguna</span>
-          					<span class="info-box-number">-angka-</span>
+  					<span class="info-box-text">User Aktif</span>
+  					<span class="info-box-number" id="user"></span>
   	            </div>
   	        </div>
         </div>
@@ -90,3 +92,33 @@
         </div>
     </div>
 </section>
+
+<script>
+	jQuery(document).ready(function(){
+
+		jQuery.get('dashboard-pengajuan', function(result){
+			if(result){
+				jQuery('#pengajuan').html(result);
+			}
+		});
+
+		jQuery.get('dashboard-penolakan', function(result){
+			if(result){
+				jQuery('#penolakan').html(result);
+			}
+		});
+
+		jQuery.get('dashboard-peraturan', function(result){
+			if(result){
+				jQuery('#peraturan').html(result);
+			}
+		});
+
+		jQuery.get('dashboard-user', function(result){
+			if(result){
+				jQuery('#user').html(result);
+			}
+		});
+
+	});
+</script>

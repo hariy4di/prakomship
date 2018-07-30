@@ -32,6 +32,13 @@ Route::prefix('app')->group(function () {
 	Route::get('cek-level', 'AppController@cek_level');
 	Route::get('attach-destroy', 'AppController@attach_destroy');
 
+	//Dashboard
+	Route::get('dashboard-pengajuan', 'DashboardController@pengajuan');
+	Route::get('dashboard-penolakan', 'DashboardController@penolakan');
+	Route::get('dashboard-peraturan', 'DashboardController@peraturan');
+	Route::get('dashboard-user', 'DashboardController@user');
+
+	
 	//Daftar Pengajuan
 	Route::get('pengajuan', 'PengajuanController@index');
 	Route::get('pengajuan/jenis-dropdown', 'PengajuanController@jenis_dropdown');
