@@ -39,7 +39,7 @@
 	                        <a href="{{ url('data/peraturan/'.$row[0]->nama_file) }}"
 	                           class="btn btn-primary btn-md"
 	                           target="_blank">
-	                        	<i class="icon-download5"></i> File Peraturan
+	                        	<i class="icon-eye6"></i> File Peraturan
 	                        </a>
         				</li>
         				<div class="py-1 text-xs-center">
@@ -62,17 +62,24 @@
         		<div class="col-lg-4">
         			<div class="card border-grey border-lighten-2">
         				<div class="card-block">
-	                        <h4 class="card-title">Peraturan Terbaru</h4>
-	                    </div>
-	                    <!-- <div class="card-block">
+	                        <h4 class="card-title">Lima Peraturan Terbaru</h4>
 	                        <ul class="list-group">
-	                            <li class="list-group-item"><strong>Website :</strong> <a href="#" class="card-link">https://pixinvent.com/</a></li>
-	                            <li class="list-group-item"><strong>Customer service :</strong> 022 8888 9999</li>
-	                            <li class="list-group-item"><strong>Founder :</strong> PIXINVENT</li>
-	                            <li class="list-group-item"><strong>Founded :</strong> 2017</li>
-	                            <li class="list-group-item"><strong>Support:</strong> <a href="#">support@pixinvent.com</a></li>
+
+	                        @foreach($new_peraturan as $peraturan)
+	                            <li class="list-group-item">
+	                            	<strong>{{ $peraturan->nomor }}</strong> tentang
+	                            	<a href="{{ url('/search-result/'.$peraturan->id) }}" class="card-link">
+	                            		{{ $peraturan->tentang }}
+	                            	</a>
+	                            	<br>
+	                            	<span style="font-size:12px;">
+	                            		<em>diposting pada {{ $peraturan->tgl_update }}</em>
+	                            	</span>
+	                            </li>
+	                        @endforeach
+
 	                        </ul>
-	                    </div> -->
+	                    </div>
         			</div>
         		</div>
         	</div>

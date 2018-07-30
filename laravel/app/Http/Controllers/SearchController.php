@@ -62,8 +62,20 @@ class SearchController extends Controller
 		");
 
 		$jml=count($rows);
+
+		$new_peraturan = DB::select("
+			SELECT 	id,
+					nomor,
+					tentang,
+					nama_file,
+					date_format(updated_at, '%d %M %Y') AS tgl_update
+			FROM tb_peraturan
+			WHERE status_id='4' AND aktif='1'
+			ORDER BY updated_at DESC
+			LIMIT 5
+		");
 		
-		return view('search', compact('rows','jml'));
+		return view('search', compact('rows','jml','new_peraturan'));
 	}
 
 	public function getResult($id)
@@ -76,7 +88,7 @@ class SearchController extends Controller
 					a.abstrak,
 					b.jenis,
 					a.nama_file,
-					date_format(a.updated_at, '%d-%m-%Y') as updated_at
+					date_format(a.updated_at, '%d-%m-%Y') AS updated_at
 			FROM tb_peraturan a
 			LEFT OUTER JOIN r_jenis_peraturan b ON(a.jenis_id=b.id)
 			WHERE a.id=? AND a.status_id='4' AND a.aktif='1'
@@ -84,6 +96,18 @@ class SearchController extends Controller
 			$id
 		]);
 
-		return view('search-result', compact('row'));
+		$new_peraturan = DB::select("
+			SELECT 	id,
+					nomor,
+					tentang,
+					nama_file,
+					date_format(updated_at, '%d %M %Y') as tgl_update
+			FROM tb_peraturan
+			WHERE status_id='4' AND aktif='1'
+			ORDER BY updated_at DESC
+			LIMIT 5
+		");
+
+		return view('search-result', compact('row','new_peraturan'));
 	}
 }

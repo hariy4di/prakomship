@@ -1,124 +1,142 @@
 <!-- Prevent direct access to .html file -->
 <script>
-    if(typeof app === 'undefined'){
-        document.location.href='index.php';
-    }
+	if(typeof app === 'undefined'){
+		document.location.href='index.php';
+	}
 </script>
 
 <section class="content-header">
-    <h1>Dashboard</h1>
+	<h1>Dashboard</h1>
 </section>
 
 <!-- Main content -->
 <section class="content">
-    <div class="row">
-     	  <div class="col-md-3 col-sm-6 col-xs-12">
-          	<div class="info-box">
-          		<a href="./#/pengajuan/daftar">
-              		<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-              	</a>
-              	<div class="info-box-content">
-            		<span class="info-box-text">Pengajuan</span>
-            		<span class="info-box-number" id="pengajuan"></span>
-              	</div>
+	<div class="row">
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<a href="./#/pengajuan/daftar">
+					<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+				</a>
+				<div class="info-box-content">
+					<span class="info-box-text">Pengajuan</span>
+					<span class="info-box-number" id="pengajuan"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<a href="./#/pengajuan/daftar">
+					<span class="info-box-icon bg-red"><i class="ion ion-ios-gear-outline"></i></span>
+				</a>
+				<div class="info-box-content">
+					<span class="info-box-text">Penolakan</span>
+					<span class="info-box-number" id="penolakan"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-green"><i class="fa fa-book"></i></span>
+				<div class="info-box-content">
+					<span class="info-box-text">Peraturan Final</span>
+					<span class="info-box-number" id="peraturan"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+				<div class="info-box-content">
+					<span class="info-box-text">User Aktif</span>
+					<span class="info-box-number" id="user"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="box box-success">
+            	<div class="box-header with-border">
+            		<h3 class="box-title">Pengajuan Peraturan</h3>
+		            <!-- <div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		                </button>
+		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		            </div> -->
+            	</div>
+            	<div class="box-body chart-responsive">
+              		<div class="chart" id="pengajuan-chart" style="height: 300px;"></div>
+            	</div>
           	</div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-            	<a href="./#/pengajuan/daftar">
-                	<span class="info-box-icon bg-red"><i class="fa fa-book"></i></span>
-                </a>
-                <div class="info-box-content">
-                    <span class="info-box-text">Penolakan</span>
-                    <span class="info-box-number" id="penolakan"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-		    <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-book"></i></span>
-		        <div class="info-box-content">
-  					<span class="info-box-text">Peraturan Final</span>
-  					<span class="info-box-number" id="peraturan"></span>
-		        </div>
-		    </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-  	        <div class="info-box">
-  	            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-  	            <div class="info-box-content">
-  					<span class="info-box-text">User Aktif</span>
-  					<span class="info-box-number" id="user"></span>
-  	            </div>
-  	        </div>
-        </div>
-    </div>
+		</div>
 
-    <div class="row">
-        <div class="col-md-7">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Penerbitan Peraturan</h3>
-                </div>
-                <div class="box-body">
-                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-5">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Jenis Peraturan</h3>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="chart-responsive"><canvas id="pieChart" height="150"></canvas></div>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="chart-legend clearfix">
-                                <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                                <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                                <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                                <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                                <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                                <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="col-md-6">
+			<div class="box box-danger">
+            	<div class="box-header with-border">
+            		<h3 class="box-title">Jenis Peraturan</h3>
+		            <!-- <div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		                </button>
+		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		            </div> -->
+            	</div>
+	            <div class="box-body chart-responsive">
+	              	<div class="chart" id="jenis-chart" style="height: 300px; position: relative;"></div>
+	            </div>
+          	</div>
+		</div>
+	</div>
 </section>
 
 <script>
 	jQuery(document).ready(function(){
 
-		jQuery.get('dashboard-pengajuan', function(result){
+		jQuery.get('dashboard/pengajuan', function(result){
 			if(result){
 				jQuery('#pengajuan').html(result);
 			}
 		});
 
-		jQuery.get('dashboard-penolakan', function(result){
+		jQuery.get('dashboard/penolakan', function(result){
 			if(result){
 				jQuery('#penolakan').html(result);
 			}
 		});
 
-		jQuery.get('dashboard-peraturan', function(result){
+		jQuery.get('dashboard/peraturan', function(result){
 			if(result){
 				jQuery('#peraturan').html(result);
 			}
 		});
 
-		jQuery.get('dashboard-user', function(result){
+		jQuery.get('dashboard/user', function(result){
 			if(result){
 				jQuery('#user').html(result);
 			}
 		});
+
+		//BAR CHART
+	    var bar = new Morris.Bar({
+	      	element: 'pengajuan-chart',
+	      	resize: true,
+	      	url:'label',
+	      	/*data: url,*/
+	      	data: [
+		        {y: '2006', a: 100, b: 90},
+		        {y: '2007', a: 75, b: 65},
+		        {y: '2008', a: 50, b: 40},
+		        {y: '2009', a: 75, b: 65},
+		        {y: '2010', a: 50, b: 40},
+		        {y: '2011', a: 75, b: 65},
+		        {y: '2012', a: 100, b: 90}
+	      	],
+			barColors: ['#00a65a', '#f56954'],
+			xkey: 'bulan',
+			ykeys: ['jml_pengajuan', 'jml_terbit'],
+			labels: ['Pengajuan', 'Penolakan'],
+			hideHover: 'auto'
+	    });
 
 	});
 </script>

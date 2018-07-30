@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>S.H.I.P.</title>
+  <title>SHIP</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
   <link rel="stylesheet" href="{{ asset('template/adminlte245/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('template/adminlte245/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('template/adminlte245/bower_components/Ionicons/css/ionicons.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('template/adminlte245/bower_components/morris.js/morris.css') }}">
   
   <link rel="stylesheet" href="{{ asset('template/adminlte245/dist/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('template/adminlte245/dist/css/skins/_all-skins.min.css') }}">
@@ -153,7 +154,8 @@
 <script src="{{ asset('template/adminlte245/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('template/adminlte245/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('template/adminlte245/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-<script src="{{ asset('template/adminlte245/bower_components/chart.js/Chart.js') }}"></script>
+<script src="{{ asset('template/adminlte245/bower_components/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('template/adminlte245/bower_components/morris.js/morris.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('template/adminlte245/dist/js/demo.js') }}"></script>
 
