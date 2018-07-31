@@ -10,9 +10,9 @@
         @csrf
         @for($i = 0; $i < count($rowsTanya); $i++)
           
-          <div class="row">
+          <div class="row" align="justify">
             <div class="col-md-6">
-              <div class="form-group">
+              <div class="form-group" align="justify">
                 <label>{{ $rowsTanya[$i]->id."." }}</label>
                 <label>{{ $rowsTanya[$i]->deskripsi }}</label>
           
@@ -26,8 +26,6 @@
 
                   @elseif($rowsTanya[$i]->jenis == '3')
                   <br>
-                  {{--  <div class="radio" id="jawaban">
-                  </div>  --}}
                    <div class="radio">
                     <label><input type="radio" value="1" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required">Tidak Puas</label>
                   </div>
