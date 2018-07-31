@@ -61,16 +61,16 @@
         </div>
         <div class="navbar-container content container-fluid">
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
-            <ul class="nav navbar-nav">
-              
+            <ul class="nav navbar-nav">          
             </ul>
             <ul class="nav navbar-nav float-xs-right">
-
+              <li style="margin-top:10px;"><a href="{{ url('survei') }}" class="btn btn-info">Survei</a></li>  
             @if(!session('authenticated'))
               <li style="margin-top:10px;"><a href="{{ url('login') }}" class="btn btn-success">Login</a></li>
             @else
               <li style="margin-top:10px;"><a href="{{ url('/app/#') }}" class="btn btn-success">App</a></li>
             @endif
+              
 
             </ul>
           </div>
