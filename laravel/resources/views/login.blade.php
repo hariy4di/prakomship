@@ -8,12 +8,8 @@
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title>Login - S.H.I.P</title>
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('template/robust/app-assets/images/ico/apple-icon-60.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('template/robust/app-assets/images/ico/apple-icon-76.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('template/robust/app-assets/images/ico/apple-icon-120.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('template/robust/app-assets/images/ico/apple-icon-152.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/robust/app-assets/images/ico/favicon.ico') }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('template/robust/app-assets/images/ico/favicon-32.png') }}">
+    <link rel="shortcut icon" href="{{ asset('data/img/ship.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('data/img/ship.ico') }}" type="image/x-icon">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -55,9 +51,8 @@
         <div class="card border-grey border-lighten-3 m-0">
             <div class="card-header no-border">
                 <div class="card-title text-xs-center">
-                    <div class="p-1"><img src="{{ asset('template/robust/app-assets/images/logo/robust-logo-dark.png') }}" alt="branding logo"></div>
+                    <div class="p-1"><img src="{{ asset('data/img/ship3.png') }}" alt="branding logo" height="120"></div>
                 </div>
-                <!-- <h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2"><span>Login with Robust</span></h6> -->
             </div>
             <div class="card-body collapse in">
                 <div class="card-block">
@@ -67,6 +62,7 @@
                             <input type="text" class="form-control form-control-lg input-lg" id="username" name="username" placeholder="Username" required>
                             <div class="form-control-position"><i class="icon-head"></i></div>
                         </fieldset>
+                        <br>
                         <fieldset class="form-group position-relative has-icon-left">
                             <input type="password" class="form-control form-control-lg input-lg" id="password" name="password" placeholder="Password" required>
                             <div class="form-control-position"><i class="icon-key3"></i></div>

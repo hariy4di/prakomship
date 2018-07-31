@@ -43,15 +43,15 @@
   <body data-open="click" data-menu="vertical-menu" data-col="1-column" class="vertical-layout vertical-menu 1-column  fixed-navbar">
 
     <!-- navbar-fixed-top-->
-    <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-dark navbar-shadow">
+    <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-shadow">
       <div class="navbar-wrapper">
         <div class="navbar-header">
           <ul class="nav navbar-nav">
             <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a></li>
             <li class="nav-item">
               <a href="{{ url('/') }}" class="navbar-brand nav-link">
-                <img alt="branding logo" src="{{ asset('template/robust/app-assets/images/logo/robust-logo-light.png') }}" data-expand="{{ asset('template/robust/app-assets/images/logo/robust-logo-light.png') }}" data-collapse="{{ asset('template/robust/app-assets/images/logo/robust-logo-small.png') }}" class="brand-logo">
-                {{--<img alt="branding logo" src="{{ asset('data/img/ship-light.png') }}" data-expand="{{ asset('data/img/ship-light.png') }}" data-collapse="{{ asset('data/img/ship-light.png') }}" class="brand-logo" height="33" width="33">--}}
+                {{--<img alt="branding logo" src="{{ asset('template/robust/app-assets/images/logo/robust-logo-light.png') }}" data-expand="{{ asset('template/robust/app-assets/images/logo/robust-logo-light.png') }}" data-collapse="{{ asset('template/robust/app-assets/images/logo/robust-logo-small.png') }}" class="brand-logo">--}}
+                <img alt="branding logo" src="{{ asset('data/img/ship4.png') }}" data-expand="{{ asset('data/img/ship4.png') }}" data-collapse="{{ asset('data/img/ship4.png') }}" class="brand-logo" height="33">
               </a>
             </li>
             <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x icon-icon-rotate-right-right"></i></a></li>
@@ -61,15 +61,21 @@
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
             <ul class="nav navbar-nav">
                 <li style="margin-top:10px;"class="nav-item hidden-sm-down">
-                    <a href="{{ url('survei') }}" target="_blank" class="btn btn-success">Survei</a>
+                    <a href="{{ url('survei') }}" class="btn btn-success">
+                        <i class="icon-list"></i> Survei
+                    </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav float-xs-right">
 
             @if(!session('authenticated'))
-                <li style="margin-top:10px;"><a href="{{ url('login') }}" class="btn btn-info">Login</a></li>
+                <li style="margin-top:10px;">
+                    <a href="{{ url('login') }}" class="btn btn-success"><i class="icon-log-in"></i> Login</a>
+                </li>
             @else
-                <li style="margin-top:10px;"><a href="{{ url('/app/#') }}" class="btn btn-info">App</a></li>
+                <li style="margin-top:10px;">
+                    <a href="{{ url('/app/#') }}" class="btn btn-success">App</a>
+                </li>
             @endif
 
             </ul>

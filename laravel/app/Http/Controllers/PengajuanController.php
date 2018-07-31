@@ -25,11 +25,6 @@ class PengajuanController extends Controller
     		$status = " WHERE a.status_id in('2','6') ";
     	}
 
-    	$tahun="";
-    	if(isset($_GET['tahun']) && $_GET['tahun']!==''){
-    		$tahun=" AND a.tahun='".$_GET['tahun']."' ";
-    	}
-
     	$rows = DB::select("
 			SELECT 	a.id,
 					b.jenis,
@@ -45,7 +40,7 @@ class PengajuanController extends Controller
 			LEFT OUTER JOIN r_jenis_peraturan b ON(a.jenis_id=b.id)
 			LEFT OUTER JOIN r_status c ON(a.status_id=c.id)
 			LEFT OUTER JOIN tb_user d ON(a.user_id=d.id)
-			".$status.$tahun."
+			".$status."
 			ORDER BY a.status_id, a.updated_at DESC
     	");
     	$rows=collect($rows);
