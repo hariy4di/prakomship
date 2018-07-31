@@ -379,28 +379,6 @@ class LaporanController extends Controller
                             </tbody>
                         </table>
 
-                        <table id="tabel-ruh" class="table table-hover" style="border:1px solid #000;border-collapse:collapse; width:100%">
-                            <thead>
-                            <tr>
-                            <th style="border:1px solid #000; border-collapse:collapse; text-align:center; padding:4px; width:5%;">Nomor</th>
-                            <th style="border:1px solid #000; border-collapse:collapse; text-align:center; padding:4px; width:5%;">Tahun</th>
-                            <th style="border:1px solid #000; border-collapse:collapse; text-align:center; padding:4px; width:5%;">Tentang</th>
-                            <th style="border:1px solid #000; border-collapse:collapse; text-align:center; padding:4px; width:5%;">Jenis</th>
-
-                            </tr>
-                            <tr>
-                                    <td>'.$januari[0]->jumlah.'</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-
-                                </tr>
-
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-
 
 			</p>
 			';
