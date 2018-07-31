@@ -10,8 +10,8 @@
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <div class="px-2 py-3 row mb-0 mt-3">
       {{--<img class="img-fluid mx-auto d-block pb-3 pt-4 width-65-per" src="{{ asset('template/robust/app-assets/images/logo/robust-logo-dark-big.png') }}" alt="Robust Search">--}}
-      <img class="img-fluid mx-auto d-block pb-3 pt-4" src="{{ asset('data/img/ship.png') }}" alt="Robust Search" height="88" width="88">
-      <form id="form-cari" action="{{ url('/search') }}" method="get" class="form">
+      <img class="img-fluid mx-auto d-block pb-3 pt-4" src="{{ asset('data/img/ship3.png') }}" alt="Robust Search">
+      <form id="form-cari" action="{{ url('/search') }}" method="get" class="form" style="margin-top:-88px;">
         @csrf
         <fieldset class="form-group position-relative">
           <input id="cari" type="text" name="q" value="{!! isset($_GET['q']) ? $_GET['q'] : null !!}" class="form-control form-control-lg input-lg" placeholder="Tanya Kami ..." required>
@@ -21,7 +21,7 @@
         </fieldset>
         <div class="row py-2">
           <div class="col-xs-12 text-xs-center">
-            <button class="btn btn-primary btn-md" id="btn-cari" type="submit">
+            <button class="btn btn-info btn-md" id="btn-cari" type="submit">
               <i class="icon-ios-search-strong"></i> Pencarian Biasa
             </button>
             <!-- <button class="btn btn-warning btn-md" id="btn-lanjut" type="button">

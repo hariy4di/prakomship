@@ -85,56 +85,47 @@ class DashboardController extends Controller
         $arr_bulan  = (array)$row_bulan;
         $arr_key    = array_keys($arr_bulan);
 
-        dd($arr_bulan);
+        $query_union="";
+        for ($i=1; $i < count($arr_key); $i++) { 
+            $query_union .= "
+                UNION ALL
 
-        $union = "
-            UNION ALL
-
-            SELECT(updated_at) as bulan,
-                    (select count(status_id)
-                    from tb_peraturan
-                    where status_id = 4
-                    and month(updated_at) = 8) as status_terbit,
-                    (select count(status_id)
-                    from tb_peraturan
-                    where status_id <> 4
-                    and month(updated_at) = 8) as status_pengajuan
-            from tb_peraturan
-            where month(updated_at) = 8
-        ";
-
-        if(count())
+                SELECT  MONTH(updated_at) as bulan,
+                        (   SELECT count(status_id)
+                            FROM tb_peraturan
+                            WHERE status_id = 4 and MONTH(updated_at) = ".$arr_bulan[$arr_key[$i]]->bulan."
+                        ) AS jml_terbit,
+                        (   SELECT count(status_id)
+                            FROM tb_peraturan
+                            WHERE status_id <> 4 and MONTH(updated_at) = ".$arr_bulan[$arr_key[$i]]->bulan."
+                        ) AS jml_pengajuan
+                FROM tb_peraturan
+                WHERE month(updated_at) = ".$arr_bulan[$arr_key[$i]]->bulan."
+            ";
+        }
 
         $rows = DB::select("
-            SELECT  DISTINCT(bulan),
-                    status_pengajuan,
-                    status_terbit
+            SELECT  DISTINCT(bulan) AS bulan,
+                    jml_pengajuan,
+                    jml_terbit
             FROM(
                 SELECT  month(updated_at) AS bulan,
                         (SELECT count(status_id)
                             FROM tb_peraturan
-                            WHERE status_id = 4 AND month(updated_at) = 7) AS status_terbit,
-                        (select count(status_id)
-                        from tb_peraturan
-                        where status_id <> 4
-                        and month(updated_at) = 7) as status_pengajuan
+                            WHERE status_id = 4 AND month(updated_at) = ".$arr_bulan[$arr_key[0]]->bulan."
+                        ) AS jml_terbit,
+                        (SELECT count(status_id)
+                            FROM tb_peraturan
+                            WHERE status_id <> 4 AND month(updated_at) = ".$arr_bulan[$arr_key[0]]->bulan."
+                        ) AS jml_pengajuan
                 FROM tb_peraturan
-                WHERE month(updated_at) = 7
-
-                UNION ALL
-
-                select month(updated_at) as bulan,
-                        (select count(status_id)
-                        from tb_peraturan
-                        where status_id = 4
-                        and month(updated_at) = 8) as status_terbit,
-                        (select count(status_id)
-                        from tb_peraturan
-                        where status_id <> 4
-                        and month(updated_at) = 8) as status_pengajuan
-                from tb_peraturan
-                where month(updated_at) = 8
+                WHERE month(updated_at) = ".$arr_bulan[$arr_key[0]]->bulan."
+                
+                ".$query_union."
             ) z
+            ORDER by z.bulan
         ");
+
+        return json_encode($rows);
     }
 }

@@ -41,8 +41,15 @@
 	                        </a>
         				</li>
         				<div class="py-1 text-xs-center">
-                            <a href="{{ $facebook }}" class="btn btn-social-icon mr-1 mb-1 btn-outline-facebook"><span class="icon-facebook3"></span></a>
-                            <a href="{{ $twitter }}" class="btn btn-social-icon mr-1 mb-1 btn-outline-twitter"><span class="icon-twitter3"></span></a>
+                            <a href="{{ $facebook }}" class="btn btn-social-icon mr-1 mb-1 btn-outline-facebook" target="_blank">
+                            	<span class="icon-facebook3"></span>
+                            </a>
+                            <a href="{{ $twitter }}" class="btn btn-social-icon mr-1 mb-1 btn-outline-twitter" target="_blank">
+                            	<span class="icon-twitter3"></span>
+                            </a>
+                            {{--<a href="{{ $gplus }}" class="btn btn-social-icon mr-1 mb-1 btn-outline-twitter" target="_blank">
+                            	<span class="icon-google-plus4"></span>
+                            </a>--}}
                         </div>
 
         			@else

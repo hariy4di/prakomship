@@ -59,16 +59,18 @@
         </div>
         <div class="navbar-container content container-fluid">
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
-            <ul class="nav navbar-nav">          
+            <ul class="nav navbar-nav">
+                <li style="margin-top:10px;"class="nav-item hidden-sm-down">
+                    <a href="{{ url('survei') }}" target="_blank" class="btn btn-success">Survei</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav float-xs-right">
-              <li style="margin-top:10px;"><a href="{{ url('survei') }}" class="btn btn-info">Survei</a></li>  
+
             @if(!session('authenticated'))
-              <li style="margin-top:10px;"><a href="{{ url('login') }}" class="btn btn-success">Login</a></li>
+                <li style="margin-top:10px;"><a href="{{ url('login') }}" class="btn btn-info">Login</a></li>
             @else
-              <li style="margin-top:10px;"><a href="{{ url('/app/#') }}" class="btn btn-success">App</a></li>
+                <li style="margin-top:10px;"><a href="{{ url('/app/#') }}" class="btn btn-info">App</a></li>
             @endif
-              
 
             </ul>
           </div>

@@ -111,6 +111,7 @@ class SearchController extends Controller
 
 		$facebook = Share::load(url('/search-result/'.$id), $row[0]->nomor.' tentang '.$row[0]->tentang)->facebook();
     	$twitter = Share::load(url('/search-result/'.$id), $row[0]->nomor.' tentang '.$row[0]->tentang)->twitter();
+    	//$gplus = Share::load(url('/search-result/'.$id), $row[0]->nomor.' tentang '.$row[0]->tentang)->gplus();
 
 		return view('search-result', compact('row','new_peraturan','facebook','twitter'));
 	}
