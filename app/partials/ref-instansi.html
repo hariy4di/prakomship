@@ -21,8 +21,7 @@
                 	<h4><strong>Tabel Referensi Instansi</strong></h4>
                 </div>
                 <div class="col-lg-4">
-                    <button class="btn btn-info btn-sm pull-right tambah">
-                    	<i class="fa fa-plus"></i>
+                  <span id="tambah"></span>
                     </button>
                 </div>
             </div>
@@ -100,6 +99,15 @@
             }
             return lanjut;
         }
+
+        $.get('cek-level', function (result) {
+            if (result == '00' || result == '99') { //Administrator or Super Admin
+                $('#tambah').html('<button class="btn btn-info btn-sm pull-right tambah"><i class="fa fa-plus"></i></button>');
+            }
+            else {
+                $('#tambah').html('');
+            }
+        });
 
 		function page_default(){
             jQuery('.warning,#div-form').hide();
