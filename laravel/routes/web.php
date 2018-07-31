@@ -22,6 +22,8 @@ Route::get('logout', 'AuthController@logout');
 
 Route::get('survei', 'SurveiController@index');
 Route::get('survei/usiaDropDown', 'SurveiController@dropdown_usia');
+Route::get('survei/jwbDropDown', 'SurveiController@dropdown_ref_jawab');
+Route::post('survei', 'SurveiController@store');
 
 
 Route::middleware(['auth'])->group(function () {
