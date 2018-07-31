@@ -33,7 +33,7 @@ class RefJnsPeraturanController extends Controller
             $insert = DB::insert("
                 INSERT INTO r_jenis_peraturan(jenis, singkatan)
                 VALUES(?,?)
-            ", [
+            ",[
                 $request->input('jenis'),
                 $request->input('singkatan')
             ]);
@@ -96,8 +96,8 @@ class RefJnsPeraturanController extends Controller
                 return 'Data gagal dihapus!';
             }
         } catch (\Exception $e) {
-            //return $e;
-            return 'Terdapat kesalahan lainnya. Hubungi Admin!';
+            return $e;
+            //return 'Terdapat kesalahan lainnya. Hubungi Admin!';
         }
     }
 }

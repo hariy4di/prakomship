@@ -40,7 +40,7 @@ Route::prefix('app')->group(function () {
 
 	//Dashboard
 	Route::prefix('dashboard')->group(function () {
-		
+
 		Route::get('pengajuan', 'DashboardController@pengajuan');
 		Route::get('penolakan', 'DashboardController@penolakan');
 		Route::get('peraturan', 'DashboardController@peraturan');
@@ -50,7 +50,7 @@ Route::prefix('app')->group(function () {
 
 	});
 
-	
+
 	//Daftar Pengajuan
 	Route::get('pengajuan', 'PengajuanController@index');
 	Route::get('pengajuan/jenis-dropdown', 'PengajuanController@jenis_dropdown');
@@ -65,12 +65,12 @@ Route::prefix('app')->group(function () {
 	Route::put('pengajuan/terbit', 'PengajuanController@update_terbit');
 	Route::put('pengajuan/verifikator-tolak', 'PengajuanController@update_verifikator_tolak');
 
-	
+
 	//Monitoring Pengajuan
 	Route::get('pengajuan/monitoring', 'PengajuanMonitoringController@index');
 	Route::get('pengajuan/monitoring/status-dropdown', 'PengajuanMonitoringController@status_dropdown');
 
-	
+
 	//Peraturan
 	Route::get('peraturan', 'PeraturanController@index');
 	Route::get('jnsPeraturan-dropdown', 'PeraturanController@jenis_dropdown');
@@ -78,7 +78,7 @@ Route::prefix('app')->group(function () {
 	Route::get('peraturan/{id}', 'PeraturanController@edit');
 	Route::put('peraturan', 'PeraturanController@update');
 
-	
+
 	//Label
 	Route::get('label', 'RefLabelController@index');
 	Route::post('label', 'RefLabelController@store');
@@ -86,7 +86,7 @@ Route::prefix('app')->group(function () {
 	Route::put('label', 'RefLabelController@update');
 	Route::delete('label', 'RefLabelController@destroy');
 
-	
+
 	//Instansi
 	Route::get('instansi', 'RefInstansiController@index');
 	Route::post('instansi', 'RefInstansiController@store');
@@ -94,14 +94,14 @@ Route::prefix('app')->group(function () {
 	Route::put('instansi', 'RefInstansiController@update');
 	Route::delete('instansi', 'RefInstansiController@destroy');
 
-    
+
     //Jenis Peraturan
     Route::get('jnsPeraturan', 'RefJnsPeraturanController@index');
     Route::post('jnsPeraturan', 'RefJnsPeraturanController@store');
     Route::get('jnsPeraturan/{id}', 'RefJnsPeraturanController@edit');
     Route::put('jnsPeraturan', 'RefJnsPeraturanController@update');
-	Route::delete('jnsPeraturan', 'RefInstansiController@destroy');
-	
+	Route::delete('jnsPeraturan', 'RefJnsPeraturanController@destroy');
+
 
 	//Pertanyaan Survei
     Route::get('surveiTanya', 'RefSurveiTanyaController@index');
@@ -109,7 +109,7 @@ Route::prefix('app')->group(function () {
     Route::get('surveiTanya/{id}', 'RefSurveiTanyaController@edit');
     Route::put('surveiTanya', 'RefSurveiTanyaController@update');
 	Route::delete('surveiTanya', 'RefSurveiTanyaController@destroy');
-	
+
 
 	//Jawaban Survei
     Route::get('surveiJawab', 'RefSurveiJawabController@index');
@@ -117,6 +117,12 @@ Route::prefix('app')->group(function () {
     Route::get('surveiJawab/{id}', 'RefSurveiJawabController@edit');
     Route::put('surveiJawab', 'RefSurveiJawabController@update');
     Route::delete('surveiJawab', 'RefSurveiJawabController@destroy');
+
+    //Laporan
+    Route::get('pengajuan', 'LaporanController@pengajuan');
+    Route::get('penolakan', 'LaporanController@penolakan');
+    Route::get('cetakLap', 'LaporanController@cetakLap');
+    Route::get('cetakLapTolak', 'LaporanController@cetakLapTolak');
 
 });
 });

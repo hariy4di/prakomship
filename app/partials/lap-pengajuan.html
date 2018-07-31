@@ -1,0 +1,125 @@
+<!-- Prevent direct access to .html file -->
+<script>
+    if(typeof app === 'undefined'){
+        document.location.href='index.php';
+    }
+</script>
+
+<section class="content-header">
+	<h1>Laporan - Pengajuan Peraturan</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default">
+    
+                <div class="box-header with-border">
+                    <div class="col-lg-8">
+                        <h4><strong>Laporan - Pengajuan Peraturan</strong></h4>
+                    </div>
+                    <div class="col-lg-4" style="float:right">
+                        <button id="cetak" type="button" class="btn btn-info btn-sm pull-right">Export PDF</button>
+                    </div>
+                </div>
+
+                
+                <div id="div-tabel">
+                    <div class="box-body table-responsive" style="overflow-x:auto;">
+                        <table id="tabel-ruh" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nomor</th>
+                                    <th>Tahun</th>
+                                    <th>Jenis</th>
+                                    <th>Tentang</th>
+                                    <th>Tanggal Pengajuan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+
+		jQuery('.chosen').chosen();
+
+        jQuery.fn.dataTable.ext.errMode = 'none';
+		var table=jQuery('#tabel-ruh').DataTable({
+            processing: true,
+            language:{
+			    "decimal":        "",
+			    "emptyTable":     "Tidak ada data tersedia",
+			    "info":           "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+			    "infoEmpty":      "Menampilkan 0 sampai 0 dari 0 entri",
+			    "infoFiltered":   "(disaring dari _MAX_ total entri)",
+			    "infoPostFix":    "",
+			    "thousands":      ",",
+			    "lengthMenu":     "Tampilkan _MENU_ entri",
+			    "loadingRecords": "Proses Loading...",
+			    "processing":     "Sedang Proses...",
+			    "search":         "Cari:",
+			    "zeroRecords":    "Tidak ditemukan data yang sesuai",
+			    "paginate": {
+			        "first":      "Awal",
+			        "last":       "Akhir",
+			        "next":       "Sesudah",
+			        "previous":   "Sebelum"
+			    },
+			    "aria": {
+			        "sortAscending":  ": aktifkan untuk mengurutkan kolom (asc)",
+			        "sortDescending": ": aktifkan untuk mengurutkan kolom (desc)"
+			    }
+			},
+            serverSide: true,
+            ajax: 'pengajuan',
+            columns: [
+	            {data: 'nomor', name: 'nomor'},
+	            {data: 'tahun', name: 'tahun'},
+                {data: 'jenis', name: 'jenis'},
+                {data: 'tentang', name: 'tentang'},
+                {data: 'created_at', name: 'create_at'}
+	        ]
+        });
+
+        // jQuery('#tgl-awal').change(function(){
+        //     var tglawal=jQuery('#tgl-awal').val();
+        //     var tglakhir=jQuery('#tgl-akhir').val();
+        //     table.ajax.url("pengajuan?tglawal="+tglawal+"&tglakhir="+tglakhir).load();
+        // });
+
+        // jQuery('#tgl-akhir').change(function(){
+        //     var tglawal=jQuery('#tgl-awal').val();
+        //     var tglakhir=jQuery('#tgl-akhir').val();
+        //     table.ajax.url("pengajuan?tglawal="+tglawal+"&tglakhir="+tglakhir).load();
+        // });
+
+        //event click simpan
+    jQuery('#cetak').click(function(){
+            
+            window.open('cetakLap','_blank');
+            // jQuery.ajax({
+            // url:'cetakLap',
+            // method:'GET'
+            
+            // success:function(result){
+            // if(result=='success'){
+            // jQuery('#cetak').html('cetak');
+            // jQuery('#cetak').prop('disabled',false);
+            // alertify.log('Cetak selesai.');
+            // page_default();
+            // // table.ajax.reload();
+            // }}
+            // })
+        });
+    });
+</script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2018 at 10:42 AM
+-- Generation Time: Jul 31, 2018 at 03:58 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.1.12
 
@@ -286,7 +286,7 @@ INSERT INTO `r_survei_tanya` (`id`, `deskripsi`, `jenis`) VALUES
 (15, 'Keakuratan data yang ditampilkan', '3'),
 (16, 'Data yang dihasilkan informatif', '3'),
 (17, 'Data yang dihasilkan sesuai dengan kebutuhan', '3'),
-(18, 'Apakah anda pernah mengalami kendala pada saat menggunakan aplikasi SHIP?', '1'),
+(18, 'Apakah anda pernah mengalami kendala pada saat menggunakan aplikasi SHIP?', '4'),
 (19, 'Silahkan berikan informasi terkait kendala terhadap aplikasi tersebut', '1'),
 (20, 'Silahkan berikan saran dan masukkan terhadap aplikasi tersebut', '1');
 
@@ -300,6 +300,18 @@ CREATE TABLE `tb_ip_client` (
   `id` int(11) NOT NULL,
   `ip_address` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_ip_client`
+--
+
+INSERT INTO `tb_ip_client` (`id`, `ip_address`) VALUES
+(1, '::2'),
+(9, '::3'),
+(10, '::4'),
+(11, '::5'),
+(12, '::6'),
+(13, '::7');
 
 -- --------------------------------------------------------
 
@@ -341,7 +353,14 @@ CREATE TABLE `tb_peraturan` (
 INSERT INTO `tb_peraturan` (`id`, `nomor`, `tahun`, `tentang`, `abstrak`, `jenis_id`, `nama_file`, `status_id`, `user_id`, `aktif`, `keterangan`, `created_at`, `updated_at`) VALUES
 (1, 'ND-123', '2018', 'Test Pemrograman', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 11, 'test.pdf', 4, 2, '1', '', '2018-07-23 23:04:14', '2018-07-26 18:44:49'),
 (2, 'S-3456', '2017', 'Programming Test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 10, 'test.pdf', 1, 2, '1', NULL, '2018-07-24 06:58:59', '2018-07-26 18:44:41'),
-(3, 'UU 17 Tahun 2003', '2003', 'Keuangan Negara', 'Bla bla bla', 1, 'a5e298ec0c75a3bb12fe0dc851e291ea.pdf', 4, 2, '1', '', '2018-07-26 18:35:40', '2018-07-26 20:47:30');
+(3, 'UU 17 Tahun 2003', '2003', 'Keuangan Negara', 'Bla bla bla', 1, 'a5e298ec0c75a3bb12fe0dc851e291ea.pdf', 4, 2, '1', '', '2018-07-26 18:35:40', '2018-07-26 20:47:30'),
+(4, 'ND-1231', '2018', 'Keuangan Negara', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 11, '61b005d0f5566bfadc75c9fc5d07e404.pdf', 3, 2, '0', '', '2018-07-27 07:20:13', '2018-07-30 03:29:49'),
+(5, '2e7243tas', '2006', 'Penanganan Korupsi Tahun Lampau', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 3, '1921d787b0a99eee744f002472c22d34.pdf', 5, 2, '0', 'Mohon nomor diperbaiki', '2018-07-29 08:26:02', '2018-07-30 03:29:51'),
+(7, '190', '2012', 'Pencairan Anggaran', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 5, '3c3eee0e0f632c455f53ea2e4631109c.pdf', 4, 2, '1', '', '2018-07-29 08:30:53', '2018-08-01 03:29:53'),
+(8, 'PER 120', '2015', 'Tests', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 7, '97a2d0c895f691ac9fcddda09ce3337c.pdf', 4, 2, '1', '', '2018-07-29 09:17:38', '2018-07-30 03:29:55'),
+(9, 'SE 234', '5873', 'Test, Haloo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 9, '2e0d2d333becf1cd3d92674b6ca41a9e.pdf', 1, 2, '0', NULL, '2018-07-29 09:23:25', '2018-07-30 03:29:57'),
+(10, 'KMK 208', '2013', 'Test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 6, 'd4377d724e88759c7dbd43dbe91865c4.pdf', 6, 2, '0', 'Judul salah', '2018-07-30 02:36:50', '2018-07-30 04:07:47'),
+(11, 'KEP 7532143', '2005', 'Test', 'Test', 4, 'f9476ae61d9054234b66be68136470f6.pdf', 2, 2, '0', '', '2018-07-30 04:05:25', '2018-07-30 04:05:31');
 
 -- --------------------------------------------------------
 
@@ -355,6 +374,75 @@ CREATE TABLE `tb_survei` (
   `pertanyaan` int(11) NOT NULL,
   `jawaban` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_survei`
+--
+
+INSERT INTO `tb_survei` (`id`, `ip_id`, `pertanyaan`, `jawaban`) VALUES
+(3, 1, 1, 'Direktorat SITP'),
+(4, 9, 1, 'DJP'),
+(5, 10, 1, 'DJBC'),
+(6, 11, 1, 'DJPK'),
+(7, 11, 2, '8'),
+(8, 11, 3, '5 Kali'),
+(9, 11, 4, '7'),
+(10, 11, 5, '3'),
+(11, 11, 6, '4'),
+(12, 11, 7, '5'),
+(13, 11, 8, '1'),
+(14, 11, 9, '2'),
+(15, 11, 10, '5'),
+(16, 11, 11, '1'),
+(17, 11, 12, '3'),
+(18, 11, 13, '5'),
+(19, 11, 14, '2'),
+(20, 11, 15, '3'),
+(21, 11, 16, '5'),
+(22, 11, 17, '2'),
+(23, 11, 18, 'Tidak'),
+(24, 11, 19, 'sdf'),
+(25, 11, 20, 'sgdg'),
+(26, 12, 1, 'DJPPR'),
+(27, 12, 2, '8'),
+(28, 12, 3, '4 Kali'),
+(29, 12, 4, '10'),
+(30, 12, 5, '4'),
+(31, 12, 6, '5'),
+(32, 12, 7, '4'),
+(33, 12, 8, '5'),
+(34, 12, 9, '4'),
+(35, 12, 10, '5'),
+(36, 12, 11, '4'),
+(37, 12, 12, '5'),
+(38, 12, 13, '4'),
+(39, 12, 14, '5'),
+(40, 12, 15, '4'),
+(41, 12, 16, '5'),
+(42, 12, 17, '4'),
+(43, 12, 18, 'Ya'),
+(44, 12, 19, 'Tidak Ada'),
+(45, 12, 20, 'Tidak Ada'),
+(46, 13, 1, 'asd'),
+(47, 13, 2, '6'),
+(48, 13, 3, 'ags'),
+(49, 13, 4, 'ase'),
+(50, 13, 5, '1'),
+(51, 13, 6, '3'),
+(52, 13, 7, '3'),
+(53, 13, 8, '5'),
+(54, 13, 9, '3'),
+(55, 13, 10, '5'),
+(56, 13, 11, '3'),
+(57, 13, 12, '4'),
+(58, 13, 13, '3'),
+(59, 13, 14, '2'),
+(60, 13, 15, '5'),
+(61, 13, 16, '5'),
+(62, 13, 17, '4'),
+(63, 13, 18, 'Ya'),
+(64, 13, 19, 'aasf'),
+(65, 13, 20, 'agdsg');
 
 -- --------------------------------------------------------
 
@@ -491,7 +579,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `r_instansi`
 --
 ALTER TABLE `r_instansi`
-  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `r_label`
@@ -509,25 +597,25 @@ ALTER TABLE `r_survei_jawab`
 -- AUTO_INCREMENT for table `r_survei_tanya`
 --
 ALTER TABLE `r_survei_tanya`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tb_ip_client`
 --
 ALTER TABLE `tb_ip_client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_peraturan`
 --
 ALTER TABLE `tb_peraturan`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_survei`
 --
 ALTER TABLE `tb_survei`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `tb_user`

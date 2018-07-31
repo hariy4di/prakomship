@@ -49,10 +49,10 @@
                 <div id="div-form">
                     <div class="box-body">
                         <form id="form-ruh" name="form-ruh" class="form-horizontal">
-                            <input type="text" id="inp-id" name="inp-id" class="hide">
+                        <input type="text" id="inp-id" name="inp-id" class="hide">
                         <input type="text" id="inp-rekambaru" name="inp-rekambaru" class="hide">
+                        
                         <input type="hidden" id="_token" name="_token">
-                            <input type="hidden" id="_token" name="_token">
                             
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"><span class="pull-right">Jenis Peraturan</span></label>
@@ -182,12 +182,21 @@ var table=jQuery('#tabel-rjp').DataTable({
             jQuery('#inp-id').val('');
         });     
     
+    //event click ubah
+    jQuery('body').off('click', '.ubah').on('click', '.ubah', function(){
+            var id=this.id;
+            cari_data(id);
+            jQuery('#inp-id').val(id);
+            jQuery('#inp-rekambaru').val('0');
+            jQuery('#div-tabel').hide();
+            jQuery('#div-form').show();
+        });
 
     //event click simpan
     jQuery('#simpan').click(function(){
             jQuery('#simpan').html('Loading...');
             jQuery('#simpan').prop('disabled',true);
-            var lanjut=form_valid('jenis');
+            var lanjut=form_valid('jenis,singkatan');
             if(lanjut==true){
                 jQuery.get('token', function(token){
                     if(token){
