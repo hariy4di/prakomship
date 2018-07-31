@@ -86,19 +86,6 @@
             }
       })
           jQuery('#txtoptional').hide();
-
-      /*jQuery.get('survei',function(result) {
-        if(result) {
-          jQuery('#rdjawab').html(result);
-        }
-      });
-
-      jQuery.get('survei/jwbDropDown',function(result) {
-        if(result) {
-          jQuery('#jawaban').html(result);
-        }
-      });*/
-
     });
 </script>
 @endsection

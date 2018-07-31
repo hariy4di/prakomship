@@ -77,14 +77,7 @@ class SurveiController extends Controller
 		$ipCheck = DB::select("SELECT id FROM tb_ip_client WHERE ip_address = '".$ipAddress."'");
 
 		if(count($ipCheck) > 0) {
-			
-			// DB::insert(
-			// 	"INSERT INTO tb_survei(ip_id, pertanyaan, jawaban)
-			// 	VALUES($ipCheck[0]->id, $i, $jawaban)
-			// 	");
-
 			return "Gagal rekam. Anda sudah pernah melakukan survei";
-
 		} else {
 			try {
 				DB::beginTransaction();
