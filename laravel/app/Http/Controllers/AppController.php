@@ -15,7 +15,7 @@ class AppController extends Controller
 			LEFT OUTER JOIN d_menu_level b ON(a.id=b.menu_id)
 			WHERE a.aktif = '1'
 			  AND a.parent_id = 0
-			  AND b.kd_level = 
+			  AND b.kd_level = ?
 			ORDER BY a.no_urut
 		",[
 			session('kdlevel')
@@ -42,10 +42,10 @@ class AppController extends Controller
 		';
 
 		foreach($menus as $menu) {
-			
+
 			//jika is_parent == 0, tidak perlu buat sub menu
 			if($menu->is_parent=='0'){
-				
+
 				if($menu->url == ''){
 					$html_out .= '<li>
 									<a ui-sref="/">
@@ -58,7 +58,7 @@ class AppController extends Controller
 								})';
 				}
 				else{
-					$html_out .= '<li>	
+					$html_out .= '<li>
 									<a ui-sref="'.$menu->url.'">
 										<i class="'.$menu->icon.'"></i> '.$menu->title.'
 									</a>
@@ -69,7 +69,7 @@ class AppController extends Controller
 								})';
 				}
 			}
-				
+
 			//jika is_parent != 0, perlu buat sub menu dengan parameter parent_id ybs
 			else{
 				$html_out .= '<li class="treeview">
@@ -79,7 +79,7 @@ class AppController extends Controller
 									<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 								</a>
 								<ul class="treeview-menu">';
-				
+
 				$sub_menus = DB::select("
 					SELECT a.*
 					FROM d_menu a
@@ -91,10 +91,10 @@ class AppController extends Controller
 				",[
 					$menu->id, session('kdlevel')
 				]);
-				
+
 				//bentuk sub menu
 				foreach($sub_menus as $sub_menu){
-					
+
 					if($sub_menu->is_parent == '0' && $sub_menu->new_tab == '0'){
 						$html_out .= '<li>
 										<a ui-sref="'.$sub_menu->url.'">
@@ -114,7 +114,7 @@ class AppController extends Controller
 									</li>';
 					}
 				}
-				
+
 				$html_out .= '	</ul>
 							</li>';
 			}
@@ -151,7 +151,7 @@ class AppController extends Controller
 	{
 		session(['upload_lampiran' => null]);
 		setcookie('upload_lampiran', '', time() + 3600, "/");
-		
+
 		return 'Sesi upload berhasil dihapus!';
 	}
 }
