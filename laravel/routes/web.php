@@ -22,6 +22,8 @@ Route::get('logout', 'AuthController@logout');
 
 Route::get('survei', 'SurveiController@index');
 Route::get('survei/usiaDropDown', 'SurveiController@dropdown_usia');
+Route::get('survei/jwbDropDown', 'SurveiController@dropdown_ref_jawab');
+Route::post('survei', 'SurveiController@store');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -40,10 +42,11 @@ Route::prefix('app')->group(function () {
 	Route::prefix('dashboard')->group(function () {
 
 		Route::get('pengajuan', 'DashboardController@pengajuan');
-		Route::get('pengajuan-bar', 'DashboardController@pengajuan_bar');
 		Route::get('penolakan', 'DashboardController@penolakan');
 		Route::get('peraturan', 'DashboardController@peraturan');
 		Route::get('user', 'DashboardController@user');
+
+		Route::get('bar-chart', 'DashboardController@bar_chart');
 
 	});
 

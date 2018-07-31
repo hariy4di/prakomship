@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Share;
 
 class SearchController extends Controller
 {
@@ -108,6 +109,9 @@ class SearchController extends Controller
 			LIMIT 5
 		");
 
-		return view('search-result', compact('row','new_peraturan'));
+		$facebook = Share::load(url('/search-result/'.$id), $row[0]->nomor.' tentang '.$row[0]->tentang)->facebook();
+    	$twitter = Share::load(url('/search-result/'.$id), $row[0]->nomor.' tentang '.$row[0]->tentang)->twitter();
+
+		return view('search-result', compact('row','new_peraturan','facebook','twitter'));
 	}
 }
