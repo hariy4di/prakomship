@@ -43,6 +43,10 @@
 	<a href="javascript:;" class="btn btn-primary btn-xs ubah" title="Ubah Data?" id="{{ $id }}">
 		<i class="fa fa-pencil"></i>
 	</a>
+@elseif($status_id=='6' && $level=='02')
+	<a href="javascript:;" class="btn btn-primary btn-xs ubah" title="Ubah Data?" id="{{ $id }}">
+		<i class="fa fa-pencil"></i>
+	</a>
 @endif
 
 @if($status_id=='1' && $level=='01')

@@ -33,10 +33,22 @@ class DashboardController extends Controller
     	return $rows[0]->jml;
     }
 
+    public function pengajuan_bar()
+    {
+        $rows = DB::select("
+            
+        ");
+
+        return json_encode($rows);
+    }
+
     public function penolakan()
     {
     	$status="";
-    	if(session('kdlevel')==$this->operator){ //operator
+        if(session('kdlevel')==$this->administrator){ //administrator
+            $status = " WHERE status_id in('5','6') ";
+        }
+    	elseif(session('kdlevel')==$this->operator){ //operator
     		$status = " WHERE user_id='".session('id_user')."' AND status_id='5' ";
     	}
     	elseif(session('kdlevel')==$this->verifikator){ //verifikator

@@ -34,11 +34,20 @@ Route::prefix('app')->group(function () {
 	Route::get('cek-level', 'AppController@cek_level');
 	Route::get('attach-destroy', 'AppController@attach_destroy');
 
+
+	Route::get('test', 'TestController@index');
+
+
 	//Dashboard
-	Route::get('dashboard-pengajuan', 'DashboardController@pengajuan');
-	Route::get('dashboard-penolakan', 'DashboardController@penolakan');
-	Route::get('dashboard-peraturan', 'DashboardController@peraturan');
-	Route::get('dashboard-user', 'DashboardController@user');
+	Route::prefix('dashboard')->group(function () {
+		
+		Route::get('pengajuan', 'DashboardController@pengajuan');
+		Route::get('pengajuan-bar', 'DashboardController@pengajuan_bar');
+		Route::get('penolakan', 'DashboardController@penolakan');
+		Route::get('peraturan', 'DashboardController@peraturan');
+		Route::get('user', 'DashboardController@user');
+
+	});
 
 	
 	//Daftar Pengajuan
