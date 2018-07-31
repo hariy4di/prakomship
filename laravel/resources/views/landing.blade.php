@@ -7,16 +7,13 @@
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
+    
     <title>SHIP - Search Page</title>
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('template/robust/app-assets/images/ico/apple-icon-60.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('template/robust/app-assets/images/ico/apple-icon-76.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('template/robust/app-assets/images/ico/apple-icon-120.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('template/robust/app-assets/images/ico/apple-icon-152.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/robust/app-assets/images/ico/favicon.ico') }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('template/robust/app-assets/images/ico/favicon-32.png') }}">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="shortcut icon" href="{{ asset('data/img/ship.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('data/img/ship.ico') }}" type="image/x-icon">
     
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('template/robust/app-assets/css/bootstrap.css') }}">
@@ -54,6 +51,7 @@
             <li class="nav-item">
               <a href="{{ url('/') }}" class="navbar-brand nav-link">
                 <img alt="branding logo" src="{{ asset('template/robust/app-assets/images/logo/robust-logo-light.png') }}" data-expand="{{ asset('template/robust/app-assets/images/logo/robust-logo-light.png') }}" data-collapse="{{ asset('template/robust/app-assets/images/logo/robust-logo-small.png') }}" class="brand-logo">
+                {{--<img alt="branding logo" src="{{ asset('data/img/ship-light.png') }}" data-expand="{{ asset('data/img/ship-light.png') }}" data-collapse="{{ asset('data/img/ship-light.png') }}" class="brand-logo" height="33" width="33">--}}
               </a>
             </li>
             <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x icon-icon-rotate-right-right"></i></a></li>
@@ -112,6 +110,7 @@
 
     <script src="{{ asset('plugins/trincotPagination/trincotPagination.js') }}"></script>
     <script src="{{ asset('plugins/chosen/chosen.jquery.min.js') }}"></script>
+    <script src="{{ asset('template/js/share.js') }}"></script>
 
     @yield('script')
     

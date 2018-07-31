@@ -161,6 +161,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
+        Chencha\Share\ShareServiceProvider::class,
 
     ],
 
@@ -212,6 +214,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Datatables' => Yajra\Datatables\Datatables::class,
+        //'Share' => Jorenvh\Share\ShareFacade::class,
+        'Share' => Chencha\Share\ShareFacade::class,
 
     ],
 

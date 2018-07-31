@@ -11,9 +11,7 @@
 	    			@csrf
 		            <fieldset class="form-group position-relative mb-0">
 		                <input id="cari" type="text" name="q" value="{!! isset($_GET['q']) ? $_GET['q'] : null !!}" class="form-control form-control-lg input-lg" required>
-		                <div class="form-control-position">
-		                    <!-- <i class="icon-microphone2 font-medium-4"></i> -->
-		                </div>
+		                <div class="form-control-position"></div>
 		            </fieldset>
 		        </form>
 	        </div>
@@ -43,8 +41,8 @@
 	                        </a>
         				</li>
         				<div class="py-1 text-xs-center">
-                            <a href="#" class="btn btn-social-icon mr-1 mb-1 btn-outline-facebook"><span class="icon-facebook3"></span></a>
-                            <a href="#" class="btn btn-social-icon mr-1 mb-1 btn-outline-twitter"><span class="icon-twitter3"></span></a>
+                            <a href="{{ $facebook }}" class="btn btn-social-icon mr-1 mb-1 btn-outline-facebook"><span class="icon-facebook3"></span></a>
+                            <a href="{{ $twitter }}" class="btn btn-social-icon mr-1 mb-1 btn-outline-twitter"><span class="icon-twitter3"></span></a>
                         </div>
 
         			@else

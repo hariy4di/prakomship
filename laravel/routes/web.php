@@ -40,10 +40,11 @@ Route::prefix('app')->group(function () {
 	Route::prefix('dashboard')->group(function () {
 		
 		Route::get('pengajuan', 'DashboardController@pengajuan');
-		Route::get('pengajuan-bar', 'DashboardController@pengajuan_bar');
 		Route::get('penolakan', 'DashboardController@penolakan');
 		Route::get('peraturan', 'DashboardController@peraturan');
 		Route::get('user', 'DashboardController@user');
+
+		Route::get('bar-chart', 'DashboardController@bar_chart');
 
 	});
 

@@ -33,15 +33,6 @@ class DashboardController extends Controller
     	return $rows[0]->jml;
     }
 
-    public function pengajuan_bar()
-    {
-        $rows = DB::select("
-            
-        ");
-
-        return json_encode($rows);
-    }
-
     public function penolakan()
     {
     	$status="";
@@ -84,5 +75,66 @@ class DashboardController extends Controller
     	");
 
     	return $rows[0]->jml;
+    }
+
+    public function bar_chart()
+    {
+        $row_bulan = DB::select("
+            SELECT DISTINCT(MONTH(updated_at)) AS bulan FROM tb_peraturan
+        ");
+        $arr_bulan  = (array)$row_bulan;
+        $arr_key    = array_keys($arr_bulan);
+
+        dd($arr_bulan);
+
+        $union = "
+            UNION ALL
+
+            SELECT(updated_at) as bulan,
+                    (select count(status_id)
+                    from tb_peraturan
+                    where status_id = 4
+                    and month(updated_at) = 8) as status_terbit,
+                    (select count(status_id)
+                    from tb_peraturan
+                    where status_id <> 4
+                    and month(updated_at) = 8) as status_pengajuan
+            from tb_peraturan
+            where month(updated_at) = 8
+        ";
+
+        if(count())
+
+        $rows = DB::select("
+            SELECT  DISTINCT(bulan),
+                    status_pengajuan,
+                    status_terbit
+            FROM(
+                SELECT  month(updated_at) AS bulan,
+                        (SELECT count(status_id)
+                            FROM tb_peraturan
+                            WHERE status_id = 4 AND month(updated_at) = 7) AS status_terbit,
+                        (select count(status_id)
+                        from tb_peraturan
+                        where status_id <> 4
+                        and month(updated_at) = 7) as status_pengajuan
+                FROM tb_peraturan
+                WHERE month(updated_at) = 7
+
+                UNION ALL
+
+                select month(updated_at) as bulan,
+                        (select count(status_id)
+                        from tb_peraturan
+                        where status_id = 4
+                        and month(updated_at) = 8) as status_terbit,
+                        (select count(status_id)
+                        from tb_peraturan
+                        where status_id <> 4
+                        and month(updated_at) = 8) as status_pengajuan
+                from tb_peraturan
+                where month(updated_at) = 8
+            ) z
+        ");
     }
 }
