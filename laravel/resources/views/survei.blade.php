@@ -32,19 +32,19 @@
 
                   @elseif($rowsTanya[$i]->jenis == '3')
                     <br>
-                    <span class="radio" style="margin-right:20px;">
+                    <span class="radio" style="margin-right:25px;">
                       <label><input type="radio" value="1" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Tidak Puas</label>
                     </span>
-                    <span class="radio" style="margin-right:20px;">
+                    <span class="radio" style="margin-right:25px;">
                       <label><input type="radio" value="2" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Kurang Puas</label>
                     </span>
-                    <span class="radio" style="margin-right:20px;">
+                    <span class="radio" style="margin-right:25px;">
                       <label><input type="radio" value="3" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Cukup Puas</label>
                     </span>
-                    <span class="radio" style="margin-right:20px;">
+                    <span class="radio" style="margin-right:25px;">
                       <label><input type="radio" value="4" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Puas</label>
                     </span>
-                    <span class="radio" style="margin-right:20px;">
+                    <span class="radio" style="margin-right:25px;">
                       <label><input type="radio" value="5" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Sangat Puas</label>
                     </span>
 
