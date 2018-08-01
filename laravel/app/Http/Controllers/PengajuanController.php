@@ -99,7 +99,7 @@ class PengajuanController extends Controller
 				// cek type file	
 				if (in_array($fileParts['extension'],$fileTypes)) {
 					//cek ukuran file
-					if($fileSize>0 && $fileSize<=2000000){
+					if($fileSize>0 && $fileSize<=5000000){
 						//membuat nama file random berikut extension
 						$newFileName = md5(time()).'.'.$fileParts['extension'];
 						

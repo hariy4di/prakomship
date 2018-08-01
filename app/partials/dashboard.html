@@ -69,7 +69,7 @@
 		<div class="col-md-6">
 			<div class="box box-danger">
             	<div class="box-header with-border">
-            		<h3 class="box-title">Jenis Peraturan</h3>
+            		<h3 class="box-title">Jenis Peraturan Final</h3>
             	</div>
 	            <div class="box-body chart-responsive">
 	              	<div class="chart" id="donut-chart" style="height: 300px; position: relative;"></div>
@@ -121,17 +121,15 @@
 		});
 
 		//DONUT CHART
-	    var donut = new Morris.Donut({
-			element: 'donut-chart',
-			resize: true,
-			colors: ["#3c8dbc", "#f56954", "#00a65a"],
-			data: [
-		        {label: "PMK", value: 12},
-		        {label: "Perdirjen", value: 30},
-		        {label: "Lainnya", value: 20}
-	      	],
-	      	hideHover: 'auto'
-	    });
+		jQuery.getJSON('dashboard/donut-chart', function(result){
+		    var donut = new Morris.Donut({
+				element: 'donut-chart',
+				resize: true,
+				colors: ["#3c8dbc", "#00a65a", "#f56954"],
+				data: result,
+		      	hideHover: 'auto'
+		    });
+		});
 
 	});
 </script>

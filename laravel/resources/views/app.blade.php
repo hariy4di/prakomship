@@ -56,7 +56,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">SHIP</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>S.H.I.P.</b></span>
+      <span class="logo-lg"><img alt="branding logo" src="{{ asset('data/img/ship4.png') }}" height="33"></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

@@ -128,4 +128,35 @@ class DashboardController extends Controller
 
         return json_encode($rows);
     }
+
+    public function donut_chart()
+    {
+        $rows = DB::select("
+            SELECT b.singkatan as label,count(a.id) AS value
+            FROM tb_peraturan a
+            LEFT OUTER JOIN r_jenis_peraturan b on(a.jenis_id=b.id)
+            WHERE a.jenis_id='5' and a.status_id='4'
+            GROUP BY label
+
+            UNION ALL
+
+            SELECT b.singkatan as label,count(a.id) AS value
+            FROM tb_peraturan a
+            LEFT OUTER JOIN r_jenis_peraturan b on(a.jenis_id=b.id)
+            WHERE a.jenis_id='7' and a.status_id='4'
+            GROUP BY label
+
+            UNION ALL
+
+            SELECT REPLACE(b.singkatan, 'UU', 'Lainnya') AS label,a.value
+            FROM(
+                SELECT min(jenis_id) as id_jenis,count(id) AS value
+                FROM tb_peraturan
+                WHERE jenis_id not IN(5,7) and status_id='4'
+            ) a
+            LEFT OUTER JOIN r_jenis_peraturan b on(a.id_jenis=b.id)
+        ");
+
+        return json_encode($rows);
+    }
 }

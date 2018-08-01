@@ -17,7 +17,8 @@ class RefJnsPeraturanController extends Controller
         $rows=collect($rows);
 
         $datatables = Datatables::of($rows)
-
+            ->addIndexColumn()
+            
             ->addColumn('action', function($row){
 				return view('action', ['id'=>$row->id]);
 			})

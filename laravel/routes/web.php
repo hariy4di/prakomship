@@ -47,6 +47,7 @@ Route::prefix('app')->group(function () {
 		Route::get('user', 'DashboardController@user');
 
 		Route::get('bar-chart', 'DashboardController@bar_chart');
+		Route::get('donut-chart', 'DashboardController@donut_chart');
 
 	});
 
@@ -118,11 +119,15 @@ Route::prefix('app')->group(function () {
     Route::put('surveiJawab', 'RefSurveiJawabController@update');
     Route::delete('surveiJawab', 'RefSurveiJawabController@destroy');
 
-    //Laporan
-    Route::get('pengajuan', 'LaporanController@pengajuan');
-    Route::get('penolakan', 'LaporanController@penolakan');
-    Route::get('cetakLap', 'LaporanController@cetakLap');
-    Route::get('cetakLapTolak', 'LaporanController@cetakLapTolak');
+    //Dashboard
+	Route::prefix('laporan')->group(function () {
+	    
+	    Route::get('pengajuan', 'LaporanController@pengajuan');
+	    Route::get('penolakan', 'LaporanController@penolakan');
+	    Route::get('cetakLap', 'LaporanController@cetakLap');
+	    Route::get('cetakLapTolak', 'LaporanController@cetakLapTolak');
+
+	});
 
 });
 });

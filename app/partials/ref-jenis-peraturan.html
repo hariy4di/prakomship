@@ -18,12 +18,10 @@
     
                 <div class="box-header with-border">
                     <div class="col-lg-8">
-                        <h4><strong>Tabel Referensi Peraturan</strong></h4>
+                        <h4><strong>Tabel Ref Jenis Peraturan</strong></h4>
                     </div>
                     <div class="col-lg-4">
-                        <button class="btn btn-info btn-sm pull-right tambah">
-                            <i class="fa fa-plus"></i>
-                        </button>
+                        <span id="tambah"></span>
                     </div>
                 </div>
                 
@@ -33,7 +31,7 @@
                         <table id="tabel-rjp" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No</th>
                                     <th>Jenis</th>
                                     <th>Singkatan</th>
                                     <th>Aksi</th>
@@ -104,6 +102,15 @@
             return lanjut;
         }
 
+        $.get('cek-level', function (result) {
+            if (result == '00' || result == '99') { //Administrator or Super Admin
+                $('#tambah').html('<button class="btn btn-info btn-sm pull-right tambah"><i class="fa fa-plus"></i></button>');
+            }
+            else {
+                $('#tambah').html('');
+            }
+        });
+
     //default halaman yg ditampilkan
 		function page_default(){
             jQuery('.warning,#div-form').hide();
@@ -165,9 +172,9 @@ var table=jQuery('#tabel-rjp').DataTable({
     serverSide: true,
     ajax: 'jnsPeraturan',
     columns: [
-        {data: 'id', name: 'id', orderable: false, searchable: false},
+        {data: 'DT_Row_Index', name: 'DT_Row_Index', className: 'table-center', orderable: false, searchable:false},
         {data: 'jenis', name: 'jenis'},
-        {data: 'singkatan', name: 'singkatan'},
+        {data: 'singkatan', name: 'singkatan', className: 'table-center',},
         {data: 'action', name: 'action', orderable: false, searchable: false}
     ]
     }); 
