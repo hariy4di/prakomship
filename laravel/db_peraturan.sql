@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2018 at 03:58 PM
+-- Generation Time: Aug 01, 2018 at 03:14 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.1.12
 
@@ -59,7 +59,9 @@ INSERT INTO `d_menu` (`id`, `title`, `no_urut`, `url`, `icon`, `parent_id`, `is_
 (11, 'Daftar Pengajuan', 1, 'pengajuan/daftar', 'fa fa-circle-o', 2, 0, 1, 'daftar-pengajuan.html', 0),
 (12, 'Monitoring Pengajuan', 2, 'pengajuan/monitoring', 'fa fa-circle-o', 2, 0, 1, 'monitoring-pengajuan.html', 0),
 (13, 'Survei - Pertanyaan', 5, 'ref/survei-tanya', 'fa fa-circle-o', 6, 0, 1, 'ref-survei-tanya.html', 0),
-(14, 'Survei - Jawaban', 6, 'ref/survei-jawab', 'fa fa-circle-o', 6, 0, 1, 'ref-survei-jawab.html', 0);
+(14, 'Survei - Jawaban', 6, 'ref/survei-jawab', 'fa fa-circle-o', 6, 0, 1, 'ref-survei-jawab.html', 0),
+(15, 'Laporan-Pengajuan', 1, 'lap/pengajuan', 'fa fa-circle-o', 5, 0, 1, 'lap-pengajuan.html', 0),
+(16, 'Laporan-Penolakan', 2, 'lap/penolakan', 'fa fa-circle-o', 5, 0, 1, 'lap-penolakan.html', 0);
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,9 @@ INSERT INTO `d_menu_level` (`menu_id`, `kd_level`) VALUES
 (13, '00'),
 (13, '99'),
 (14, '00'),
-(14, '99');
+(14, '99'),
+(15, '00'),
+(16, '00');
 
 -- --------------------------------------------------------
 
