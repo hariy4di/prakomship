@@ -81,7 +81,7 @@
 			    }
 			},
             serverSide: true,
-            ajax: 'pengajuan',
+            ajax: 'laporan/pengajuan',
             columns: [
 	            {data: 'nomor', name: 'nomor'},
 	            {data: 'tahun', name: 'tahun'},
@@ -91,35 +91,13 @@
 	        ]
         });
 
-        // jQuery('#tgl-awal').change(function(){
-        //     var tglawal=jQuery('#tgl-awal').val();
-        //     var tglakhir=jQuery('#tgl-akhir').val();
-        //     table.ajax.url("pengajuan?tglawal="+tglawal+"&tglakhir="+tglakhir).load();
-        // });
+        
 
-        // jQuery('#tgl-akhir').change(function(){
-        //     var tglawal=jQuery('#tgl-awal').val();
-        //     var tglakhir=jQuery('#tgl-akhir').val();
-        //     table.ajax.url("pengajuan?tglawal="+tglawal+"&tglakhir="+tglakhir).load();
-        // });
-
-        //event click simpan
+        //event click cetak
     jQuery('#cetak').click(function(){
             
-            window.open('cetakLap','_blank');
-            // jQuery.ajax({
-            // url:'cetakLap',
-            // method:'GET'
-            
-            // success:function(result){
-            // if(result=='success'){
-            // jQuery('#cetak').html('cetak');
-            // jQuery('#cetak').prop('disabled',false);
-            // alertify.log('Cetak selesai.');
-            // page_default();
-            // // table.ajax.reload();
-            // }}
-            // })
+            window.open('laporan/cetakLap','_blank');
+        
         });
     });
 </script>
