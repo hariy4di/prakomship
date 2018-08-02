@@ -28,7 +28,7 @@
                   @if($rowsTanya[$i]->jenis == '1')
                     <br>
                     
-                    @if($rowsTanya[$i]->id == 2 || $rowsTanya[$i]->id == 3)
+                    @if($rowsTanya[$i]->id == 3 || $rowsTanya[$i]->id == 4)
                       <input type="text" id="{{ $rowsTanya[$i]->id }}" name="{{ $rowsTanya[$i]->id }}" class="form-control round val_num" required>
                     @else
                       <input type="text" id="{{ $rowsTanya[$i]->id }}" name="{{ $rowsTanya[$i]->id }}" class="form-control round" required>
