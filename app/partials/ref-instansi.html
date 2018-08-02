@@ -100,7 +100,7 @@
         }
 
         $.get('cek-level', function (result) {
-            if (result == '00' || result == '99') { //Administrator or Super Admin
+            if (result == '99') { //Administrator or Super Admin
                 $('#tambah').html('<button class="btn btn-info btn-sm pull-right tambah"><i class="fa fa-plus"></i></button>');
             }
             else {

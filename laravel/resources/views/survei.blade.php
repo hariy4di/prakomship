@@ -6,6 +6,9 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
+      <div class="card-header">
+        <h4 class="card-title" id="basic-layout-form">Silakan mengisi survei singkat di bawah ini</h4>
+      </div>
       <div class="card-body">
         <div class="card-block">
 
@@ -18,13 +21,18 @@
               <div class="col-md-7">
                 <div class="form-group" align="justify">
                   <strong>
-                    <label>{{ $rowsTanya[$i]->id."." }}</label>
+                    <label>{{ $rowsTanya[$i]->id }}.</label>
                     <label>{{ $rowsTanya[$i]->deskripsi }}</label>
                   </strong>
             
                   @if($rowsTanya[$i]->jenis == '1')
                     <br>
-                    <input type="text" id="{{ $rowsTanya[$i]->id }}" name="{{ $rowsTanya[$i]->id }}" required>
+                    
+                    @if($rowsTanya[$i]->id == 2 || $rowsTanya[$i]->id == 3)
+                      <input type="text" id="{{ $rowsTanya[$i]->id }}" name="{{ $rowsTanya[$i]->id }}" class="form-control round val_num" required>
+                    @else
+                      <input type="text" id="{{ $rowsTanya[$i]->id }}" name="{{ $rowsTanya[$i]->id }}" class="form-control round" required>
+                    @endif
 
                   @elseif($rowsTanya[$i]->jenis == '2')
                     <br>
@@ -32,19 +40,19 @@
 
                   @elseif($rowsTanya[$i]->jenis == '3')
                     <br>
-                    <span class="radio" style="margin-right:25px;">
+                    <span class="radio" style="margin-right:50px;">
                       <label><input type="radio" value="1" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Tidak Puas</label>
                     </span>
-                    <span class="radio" style="margin-right:25px;">
+                    <span class="radio" style="margin-right:50px;">
                       <label><input type="radio" value="2" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Kurang Puas</label>
                     </span>
-                    <span class="radio" style="margin-right:25px;">
+                    <span class="radio" style="margin-right:50px;">
                       <label><input type="radio" value="3" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Cukup Puas</label>
                     </span>
-                    <span class="radio" style="margin-right:25px;">
+                    <span class="radio" style="margin-right:50px;">
                       <label><input type="radio" value="4" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Puas</label>
                     </span>
-                    <span class="radio" style="margin-right:25px;">
+                    <span class="radio" style="margin-right:50px;">
                       <label><input type="radio" value="5" name="{{ $rowsTanya[$i]->id }}" id="radio-{{ $rowsTanya[$i]->id }}" required="required"> Sangat Puas</label>
                     </span>
 
@@ -65,7 +73,7 @@
 
           @endfor
 
-            <button type="submit" value="SUBMIT">SUBMIT</button>
+            <button type="submit" class="btn btn-primary"><i class="icon-check2"></i> SUBMIT</button>
           </form>
 
         </div>

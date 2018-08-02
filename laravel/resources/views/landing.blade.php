@@ -121,6 +121,89 @@
     <script src="{{ asset('template/js/share.js') }}"></script>
 
     @yield('script')
+
+    <script>
+      jQuery(document).ready(function(){
+        
+        jQuery("body").off("keypress",'.val_char').on("keypress",'.val_char',function (e) {
+        
+          var charcode = e.which;
+          if (
+            (charcode === 8) || // Backspace
+            (charcode === 13) || // Enter
+            (charcode === 127) || // Delete
+            (charcode === 32) || // Space
+            (charcode === 0) || // arrow
+            //(charcode === 188) || // Koma
+            //(charcode === 190) || // Titik
+            //(charcode === 173) || // _
+            //(charcode === 9) || // Horizontal Tab
+            //(charcode === 11) || // Vertical Tab
+            //(charcode >= 37 && charcode <= 40) || // arrow
+            //(charcode >= 48 && charcode <= 57) ||// 0 - 9
+            (charcode >= 65 && charcode <= 90) || // a - z
+            (charcode >= 97 && charcode <= 122) // A - Z
+            )
+          { 
+            console.log(charcode)
+          }
+          else
+          {
+            e.preventDefault()
+            return
+          }
+        }); 
+
+        jQuery("body").off("keypress",'.val_name').on("keypress",'.val_name',function (e) {
+          var charcode = e.which;
+          if (
+            (charcode === 8) || // Backspace
+            (charcode === 13) || // Enter
+            (charcode === 127) || // Delete
+            (charcode === 32) || // Space
+            (charcode === 0) || // arrow
+            (charcode == 188) || // Koma
+            (charcode == 190) || // Titik
+            //(charcode === 173) || // _
+            //(charcode === 9) || // Horizontal Tab
+            //(charcode === 11) || // Vertical Tab
+            //(charcode >= 37 && charcode <= 40) || // arrow
+            //(charcode >= 48 && charcode <= 57) ||// 0 - 9
+            (charcode >= 65 && charcode <= 90) || // a - z
+            (charcode >= 97 && charcode <= 122) // A - Z
+            )
+          { 
+            console.log(charcode)
+          }
+          else
+          {
+            e.preventDefault()
+            return
+          }
+        }); 
+
+        //hanya alpabet
+        jQuery("body").off("keypress",'.val_num').on("keypress",'.val_num',function (e) {
+          var charcode = e.which;
+          if (
+            (charcode === 8) || // Backspace
+            (charcode === 13) || // Enter
+            (charcode === 127) || // Delete
+            (charcode === 0) || // arrow
+            (charcode >= 48 && charcode <= 57)// 0 - 9
+            )
+          { 
+            console.log(charcode)
+          }
+          else
+          {
+            e.preventDefault()
+            return
+          }
+        });
+        
+      });
+    </script>
     
   </body>
 </html>

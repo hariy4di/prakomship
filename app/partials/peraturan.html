@@ -54,7 +54,7 @@
                                 <th>Tahun</th>
                                 <th>Tentang</th>
                                 <th>Status<br>Peraturan</th>
-                                <th>Aksi</th>
+                                <th style="width:10%;">Aksi</th>
                         	</tr>
                         </thead>
                         <tbody>
@@ -230,6 +230,7 @@
                     jQuery('#abstrak').val(result.abstrak);
                 }
             });
+            jQuery('#jenis,#nomor,#tahun').prop('disabled',true);
         }
 
         /*jQuery('body').off('click','.tambah').on('click','.tambah', function(){
