@@ -12,8 +12,8 @@
       <div class="card-body">
         <div class="card-block">
 
-          <form method="POST" action="{{ url('survei') }}">
-          @csrf
+          <form class="form" id="form-survei">
+          <input type="hidden" name="_token" id="_token">
           
           @for($i = 0; $i < count($rowsTanya); $i++)
             
@@ -73,7 +73,8 @@
 
           @endfor
 
-            <button type="submit" class="btn btn-primary"><i class="icon-check2"></i> SUBMIT</button>
+            <button type="submit" class="btn btn-primary" id="simpan"><i class="icon-check2"></i> SUBMIT</button>
+            <!-- <button type="submit" value="SUBMIT">SUBMIT</button> -->
           </form>
 
         </div>
@@ -103,6 +104,45 @@
             }
       })
           jQuery('#txtoptional').hide();
+
+      jQuery('#simpan').click(function(){
+        jQuery('#simpan').html('Loading...');
+        jQuery('#simpan').prop('disabled',true);
+        jQuery.get('token', function(token){
+          if(token){
+              jQuery('#_token').val(token);
+              var data=jQuery('#form-survei').serialize();
+              jQuery.ajax({
+                  url:'survei',
+                  method:'POST',
+                  data:data,
+                  success:function(result){
+                      if(result=='success'){
+                          jQuery('#simpan').html('Simpan');
+                          jQuery('#simpan').prop('disabled',false);
+                          window.location.href='./';
+                      }
+                      else{
+                          jQuery('#simpan').html('Simpan');
+                          jQuery('#simpan').prop('disabled',false);
+                          alertify.log(result);
+                      }   
+                  },
+                  error:function(result){
+                      jQuery('#simpan').html('Simpan');
+                      jQuery('#simpan').prop('disabled',false);
+                      alertify.log(result);
+                  }
+              });
+          }
+          else{
+              jQuery('#simpan').html('Simpan');
+              jQuery('#simpan').prop('disabled',false);
+              alertify.log('Proses simpan gagal. Silahkan refresh halaman browser Anda!');
+          }
+        });
+      });
+
     });
 </script>
 @endsection

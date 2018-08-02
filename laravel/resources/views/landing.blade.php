@@ -35,6 +35,8 @@
     <!-- END Page Level CSS-->
 
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/chosen/chosen.min.css') }}">
+    <link href="{{ asset('plugins/alertify/themes/alertify.core.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/alertify/themes/alertify.default.css') }}" rel="stylesheet">
 
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('template/robust/assets/css/style.css') }}">
@@ -118,6 +120,7 @@
 
     <script src="{{ asset('plugins/trincotPagination/trincotPagination.js') }}"></script>
     <script src="{{ asset('plugins/chosen/chosen.jquery.min.js') }}"></script>
+    <script src="{{ asset('plugins/alertify/lib/alertify.min.js') }}"></script>
     <script src="{{ asset('template/js/share.js') }}"></script>
 
     @yield('script')

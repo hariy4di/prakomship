@@ -96,8 +96,8 @@ class SurveiController extends Controller
 				return "Anda Berhasil Melakukan Survei";
 
 			} catch(\Exception $e) {
-				// return $e;
-				return 'Terjadi kesalahan lainnya. Hubungi Admin!';
+				return $e;
+				//return 'Terjadi kesalahan lainnya. Hubungi Admin!';
 			}
 		}
 	}
