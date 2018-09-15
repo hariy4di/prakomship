@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Server version:               10.1.31-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win32
--- HeidiSQL Version:             9.5.0.5196
+-- HeidiSQL Version:             9.5.0.5288
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `r_instansi` (
   `kota` varchar(255) NOT NULL,
   `aktif` varchar(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table db_peraturan.r_instansi: ~3 rows (approximately)
 /*!40000 ALTER TABLE `r_instansi` DISABLE KEYS */;
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `r_jenis_peraturan` (
   `jenis` varchar(255) NOT NULL,
   `singkatan` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table db_peraturan.r_jenis_peraturan: ~11 rows (approximately)
 /*!40000 ALTER TABLE `r_jenis_peraturan` DISABLE KEYS */;
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `r_survei_jawab` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `deskripsi` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table db_peraturan.r_survei_jawab: ~5 rows (approximately)
 /*!40000 ALTER TABLE `r_survei_jawab` DISABLE KEYS */;
@@ -195,7 +195,8 @@ INSERT INTO `r_survei_jawab` (`id`, `deskripsi`) VALUES
 	(2, 'Kurang Puas'),
 	(3, 'Cukup Puas'),
 	(4, 'Puas'),
-	(5, 'Sangat Puas');
+	(5, 'Sangat Puas'),
+	(6, '20 Tahun');
 /*!40000 ALTER TABLE `r_survei_jawab` ENABLE KEYS */;
 
 -- Dumping structure for table db_peraturan.r_survei_tanya
@@ -236,10 +237,12 @@ CREATE TABLE IF NOT EXISTS `tb_ip_client` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table db_peraturan.tb_ip_client: ~0 rows (approximately)
+-- Dumping data for table db_peraturan.tb_ip_client: ~1 rows (approximately)
 /*!40000 ALTER TABLE `tb_ip_client` DISABLE KEYS */;
+INSERT INTO `tb_ip_client` (`id`, `ip_address`) VALUES
+	(8, '::1');
 /*!40000 ALTER TABLE `tb_ip_client` ENABLE KEYS */;
 
 -- Dumping structure for table db_peraturan.tb_label_peraturan
@@ -275,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `tb_peraturan` (
   CONSTRAINT `FK_tb_peraturan_r_jenis_peraturan` FOREIGN KEY (`jenis_id`) REFERENCES `r_jenis_peraturan` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 
--- Dumping data for table db_peraturan.tb_peraturan: ~4 rows (approximately)
+-- Dumping data for table db_peraturan.tb_peraturan: ~62 rows (approximately)
 /*!40000 ALTER TABLE `tb_peraturan` DISABLE KEYS */;
 INSERT INTO `tb_peraturan` (`id`, `nomor`, `tahun`, `tentang`, `abstrak`, `jenis_id`, `nama_file`, `status_id`, `user_id`, `aktif`, `keterangan`, `created_at`, `updated_at`) VALUES
 	(1, 'ND-123', '2018', 'Test Pemrograman', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut quam vitae orci bibendum porttitor. Nunc et auctor felis. Donec vestibulum molestie malesuada. Morbi mattis magna non arcu ultricies elementum. Cras viverra lorem nisi, quis egestas enim varius in. Praesent euismod, justo lacinia mattis iaculis, est nisi ullamcorper nisl, quis mattis orci velit et augue. Donec a erat eu nisl elementum ullamcorper et nec lacus. Aenean fringilla molestie sem, interdum consequat sapien cursus non. Proin neque lorem, rhoncus vitae eleifend et, lobortis id nunc. Morbi vitae ex porta, venenatis magna sit amet, faucibus velit. Pellentesque dignissim tortor et dui porttitor, at accumsan libero fringilla. Nunc vel augue quis ante dictum scelerisque. Cras molestie eget felis vel sagittis. Vestibulum est elit, pretium hendrerit orci id, fermentum molestie justo.', 5, 'test.pdf', 5, 2, '0', 'Test salah', '2018-05-24 06:04:14', '2018-08-02 06:27:44'),
@@ -347,12 +350,33 @@ CREATE TABLE IF NOT EXISTS `tb_survei` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip_id` int(11) NOT NULL,
   `pertanyaan` int(11) NOT NULL,
-  `jawaban` int(11) NOT NULL,
+  `jawaban` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
--- Dumping data for table db_peraturan.tb_survei: ~0 rows (approximately)
+-- Dumping data for table db_peraturan.tb_survei: ~20 rows (approximately)
 /*!40000 ALTER TABLE `tb_survei` DISABLE KEYS */;
+INSERT INTO `tb_survei` (`id`, `ip_id`, `pertanyaan`, `jawaban`) VALUES
+	(5, 8, 1, 'Test'),
+	(6, 8, 2, '6'),
+	(7, 8, 3, '12'),
+	(8, 8, 4, '1'),
+	(9, 8, 5, '1'),
+	(10, 8, 6, '1'),
+	(11, 8, 7, '1'),
+	(12, 8, 8, '1'),
+	(13, 8, 9, '1'),
+	(14, 8, 10, '1'),
+	(15, 8, 11, '1'),
+	(16, 8, 12, '1'),
+	(17, 8, 13, '1'),
+	(18, 8, 14, '1'),
+	(19, 8, 15, '1'),
+	(20, 8, 16, '1'),
+	(21, 8, 17, '1'),
+	(22, 8, 18, 'Tidak'),
+	(23, 8, 19, 'Test'),
+	(24, 8, 20, 'Test');
 /*!40000 ALTER TABLE `tb_survei` ENABLE KEYS */;
 
 -- Dumping structure for table db_peraturan.tb_user
