@@ -23,14 +23,14 @@ class PDOConnection
 
 	public function select($sql)
 	{
-        $sql_stmt = $this->dbh->prepare($sql);
-        $sql_stmt->execute();
-        $result = $sql_stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $this->dbh->query($sql);
+        /*$sql_stmt->execute();
+        $result = $sql_stmt->fetchAll(PDO::FETCH_ASSOC);*/
 
         return $result;
     }
 
-    public function insert($sql)
+    /*public function insert($sql)
     {
         $sql_stmt = $this->dbh->prepare($sql);
         
@@ -47,10 +47,58 @@ class PDOConnection
 
     function __destruct() {
         $this->dbh = NULL;
-    }
+    }*/
 }
 
-$conn = new PDOConnection();
+class MIConnection
+{
+	private $cn;
+
+	function __construct()
+	{
+		$servername = "localhost";
+		$username = "root";
+		$password = "p4ssw0rd!";
+		$dbname = "db_peraturan";
+
+		try {
+		    $this->cn = mysqli_connect($servername, $username, $password, $dbname);
+		    
+		    echo "Connected successfully";
+		} catch (PDOException $e) {
+		    echo "Connection failed: " . $e->getMessage();
+		}
+	}
+
+	public function select($sql)
+	{
+        $result = mysqli_query($this->cn,$sql);
+
+        return $result;
+    }
+
+    /*public function insert($sql)
+    {
+        $sql_stmt = $this->dbh->prepare($sql);
+        
+        try {
+            $result = $sql_stmt->execute();
+        } catch (PDOException $e) {
+            trigger_error('Error occured while trying to insert into the DB:' . $e->getMessage(), E_USER_ERROR);
+        }
+
+        if ($result) {
+            return $sql_stmt->rowCount();
+        }
+    }
+
+    function __destruct() {
+        $this->dbh = NULL;
+    }*/
+}
+
+//$conn = new PDOConnection();
+$conn = new MIConnection();
 
 
 // fungsi pencarian
@@ -75,10 +123,10 @@ function search($q)
 		|--------------------------------------------------------------------------
 		*/
 		// Kata Kunci
-		$search_exploded = explode(" ", $search);
+		/*$search_exploded = explode(" ", $search);
 		$firsttime=true;
 		$construct="";
-		foreach ($search_exploded as $search_each) {
+		foreach ($search as $search_each) {
 			if($firsttime){
 				$construct .= "WHERE";
 				$firsttime  = false;
@@ -92,7 +140,7 @@ function search($q)
 				UPPER(tentang) LIKE UPPER('%".$search_each."%') OR
 				UPPER(abstrak) LIKE UPPER('%".$search_each."%')
 			) ";
-		}
+		}*/
 		
 		/*
 		|--------------------------------------------------------------------------
@@ -103,10 +151,13 @@ function search($q)
 			SELECT 	id,
 					nomor,
 					tahun,
-					tentang,
-					nama_file
+					tentang
 			FROM tb_peraturan
-			".$construct." AND status_id='4' AND aktif='1'
+			WHERE UPPER(nomor) LIKE UPPER('%".$search."%') OR
+			UPPER(tahun) LIKE UPPER('%".$search."%') OR
+			UPPER(tentang) LIKE UPPER('%".$search."%') OR
+			UPPER(abstrak) LIKE UPPER('%".$search."%')
+			AND status_id='4' AND aktif='1'
 			ORDER BY jenis_id
 			LIMIT 5
 		");
@@ -117,16 +168,18 @@ function search($q)
 	        $i=0;
 	        foreach ($datas as $data) {
 	        	$i++;
-	        	$hasil .= "\n".$i.". ".$data['nomor']." tentang ".$data['tentang'];
+	        	$hasil .= "\n".$i.". ".$data->nomor." tentang ".$data->tentang;
 	        }
+
+	        return $hasil;
 	    }
 	    else{
 	    	$hasil = 'Maaf, pencarian tidak ditemukan..';
+
+	    	return $hasil;
 	    }
     } catch (Exception $e) {
-    	return $e;
-    	//return 'Terdapat kesalahan program!';
+    	//return $e;
+    	return 'Terdapat kesalahan program!';
     }
-
-    return $hasil;
 }
